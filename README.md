@@ -1,0 +1,2 @@
+# Inazuma
+Inazuma Text Editor
