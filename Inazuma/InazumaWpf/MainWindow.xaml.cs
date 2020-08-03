@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inazuma;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,22 @@ namespace InazumaWpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Editor myEditor = new Editor();
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+            if (State.FileName != null) Open(State.FileName);
+        }
+
+        internal void Open(string fileName)
+        {
+            myEditor.Load(fileName);
         }
     }
 }

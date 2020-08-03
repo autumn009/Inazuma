@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "InazumaWpf": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\delme\\jc001.txt\""
+    }
+  }
+}
