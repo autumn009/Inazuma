@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Inazuma
@@ -20,7 +21,9 @@ namespace Inazuma
     public class Editor
     {
         private LinkedList<MyLine> editBuffer = new LinkedList<MyLine>();
+        private LinkedListNode<MyLine> currentLine = null;
 
+        public LinkedListNode<MyLine> GetCuurentLine() => currentLine;
         public MyLine GetLine(LinkedListNode<MyLine> linkedListNode, int delta)
         {
             if (delta == 0) return linkedListNode.Value;
@@ -59,6 +62,7 @@ namespace Inazuma
                     bp = p;
                 }
             }
+            currentLine = editBuffer.First;
         }
 
         public void Save(string filename)

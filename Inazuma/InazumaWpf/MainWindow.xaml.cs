@@ -35,6 +35,8 @@ namespace InazumaWpf
             if (State.FileName != null) Open(State.FileName);
         }
 
+        internal Editor GetMyEditor() => myEditor;
+
         internal void Open(string fileName)
         {
             myEditor.Load(fileName);
