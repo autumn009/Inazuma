@@ -22,7 +22,7 @@ namespace InazumaWpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Editor myEditor = new Editor();
+        //private Editor myEditor = new Editor();
 
         public MainWindow()
         {
@@ -32,15 +32,20 @@ namespace InazumaWpf
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            if (State.FileName != null) Open(State.FileName);
+            //if (State.FileName != null) Open(State.FileName);
         }
 
-        internal Editor GetMyEditor() => myEditor;
+        //       internal Editor GetMyEditor() => myEditor;
 
-        internal void Open(string fileName)
+        //internal void Open(string fileName)
+        //{
+        //myEditor.Load(fileName);
+        //}
+
+        private void ButtonEditMacros_Click(object sender, RoutedEventArgs e)
         {
-            myEditor.Load(fileName);
+            var diaglog = new MacroEditorMain();
+            diaglog.ShowDialog();
         }
-
     }
 }

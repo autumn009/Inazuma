@@ -22,10 +22,10 @@ namespace InazumaWpf
                 p = next;
             }
         }
-        public static Editor GetMyEditor(DependencyObject fromObject)
-        {
-            var main =  GetMainWindow<MainWindow>(fromObject);
-            return main.GetMyEditor();
-        }
+        //public static Editor GetMyEditor(DependencyObject fromObject)
+        //{
+            //var main =  GetMainWindow<MainWindow>(fromObject);
+            //return main.GetMyEditor();
+        //}
     }
 }

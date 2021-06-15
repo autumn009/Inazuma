@@ -1,0 +1,28 @@
+﻿<Window x:Class="InazumaWpf.MacroEditorMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InazumaWpf"
+        mc:Ignorable="d"
+        Title="MacroEditorMain" Height="320" Width="800"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner" 
+        >
+    <Grid>
+        <Label Content="dummy" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+        <ListBox HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0" Height="200"/>
+        <TextBox Text="NAME HERE" Margin="2,205,2,0" Height="20" VerticalAlignment="Top"/>
+        <TextBox Text="COMMAND LINE HERE" Margin="2,230,2,0" Height="20" VerticalAlignment="Top"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="2,255,2,0">
+            <Button Content="Add New Entry..." Margin="2,0,2,0"></Button>
+            <Button Content="Remove Entry..." Margin="2,0,2,0"></Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button Name="ButtonOK" Click="ButtonOK_Click" IsDefault="True" Margin="2,0,2,3" Width="200">OK</Button>
+            <Button Name="ButtonCancel" IsCancel="True" Margin="2,0,2,3">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>

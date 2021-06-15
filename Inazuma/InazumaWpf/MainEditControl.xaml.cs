@@ -27,6 +27,7 @@ namespace InazumaWpf
             InitializeComponent();
         }
 
+#if false
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
@@ -58,5 +59,6 @@ namespace InazumaWpf
                 line = line.Next;
             }
         }
+#endif
     }
 }

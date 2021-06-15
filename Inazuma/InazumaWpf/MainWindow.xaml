@@ -9,7 +9,7 @@
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure">
         <ComboBox Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="COMMAND DETAIL HERE" Margin="130,0,110,0" Height="30" VerticalAlignment="Top"/>
-        <Button Width="100" Content="Edit Macros" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <Button Name="ButtonEditMacros" Click="ButtonEditMacros_Click"  Width="100" Content="Edit Macros" HorizontalAlignment="Right" VerticalAlignment="Top" Height="22"/>
         <TextBox Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,175,0,0">
             <Button Content="Working Dir" Margin="5,0,0,0"/>
