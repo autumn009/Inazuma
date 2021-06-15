@@ -41,5 +41,24 @@ namespace InazumaWpf
         {
 
         }
+
+        private void ListBoxMacros_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            updateItem();
+            MacroItem item = ListBoxMacros.SelectedItem as MacroItem;
+            if (item != null)
+            {
+                TextBoxName.Text = item.Name;
+                TextBoxCommandLine.Text = item.CommandLine;
+                CheckBoxIsDefaultEncoding.IsChecked = item.IsDefaultEncoding;
+                return;
+            }
+        }
+
+        private void updateItem()
+        {
+            // TBW
+            //throw new NotImplementedException();
+        }
     }
 }

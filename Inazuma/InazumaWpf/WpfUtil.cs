@@ -41,7 +41,7 @@ namespace InazumaWpf
         {
             var newmac = new MacroItem();
             newmac.Id = createNewUniqieId();
-            newmac.Name = $"New Macro Item(newmac.Id)";
+            newmac.Name = $"New Macro Item({newmac.Id})";
             newmac.CommandLine = "Echo New Macro Item (Re-Write me!)";
             macroItems.Add(newmac);
             return newmac;
