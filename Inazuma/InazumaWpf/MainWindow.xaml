@@ -6,9 +6,29 @@
         xmlns:local="clr-namespace:InazumaWpf"
         mc:Ignorable="d"
         Title="Inazuma" Height="450" Width="800" Background="Transparent">
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Aqua">
-        <local:MainEditControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            
-        </local:MainEditControl>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure">
+        <ComboBox Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="COMMAND DETAIL HERE" Margin="130,0,110,0" Height="30" VerticalAlignment="Top"/>
+        <Button Width="100" Content="Edit Macros" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <TextBox Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,175,0,0">
+            <Button Content="Working Dir" Margin="5,0,0,0"/>
+            <Button Content="Paste Source" Margin="5,0,0,0"/>
+            <Button Content="Run Procedure" Margin="5,0,0,0"/>
+            <Button Content="Copy Result" Margin="5,0,0,0"/>
+            <Button Content="Paste And Run Procedure" Margin="5,0,0,0"/>
+            <Label Content="Inazuma Procedural Text Editor by autumn" FontStyle="Italic" FontWeight="Black"></Label>
+            <Label x:Name="LabelVersion" Content="Version X.X" FontStyle="Italic" FontWeight="Black"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,205,0,0">
+            <Label Content="Working Dir:" Margin="5,-4,0,-4" FontWeight="Bold"/>
+            <Label Content="FULLPATH HERE" Margin="0,-4,0,-4"/>
+
+        </StackPanel>
+        <TextBox Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,225,0,0"/>
+
+
+
+
     </Grid>
 </Window>
