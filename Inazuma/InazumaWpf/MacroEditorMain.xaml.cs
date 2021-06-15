@@ -28,5 +28,18 @@ namespace InazumaWpf
         {
 
         }
+
+        private void ButtonAddNew_Click(object sender, RoutedEventArgs e)
+        {
+            var newitem = Macros.AddMacroEntry();
+            int index = ListBoxMacros.Items.Add(newitem);
+            if (index < 0) return;
+            ListBoxMacros.SelectedIndex = index;    // select created item
+        }
+
+        private void ButtonRemove_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
