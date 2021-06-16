@@ -40,7 +40,8 @@ namespace InazumaWpf
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
-
+            Macros.CopyTempToMain();
+            Close();
         }
 
         private void ButtonAddNew_Click(object sender, RoutedEventArgs e)
@@ -70,6 +71,16 @@ namespace InazumaWpf
             else
             {
                 Selection = null;
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Macros.CopyMainToTemp();
+            ListBoxMacros.Items.Clear();
+            foreach (var item in Macros.EnumMacroEntry())
+            {
+                ListBoxMacros.Items.Add(item);
             }
         }
     }

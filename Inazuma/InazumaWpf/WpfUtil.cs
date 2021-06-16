@@ -18,20 +18,19 @@ namespace InazumaWpf
         public string CommandLine;
         public DateTime LastUse;
         public bool IsDefaultEncoding;
-        public override string ToString()
-        {
-            return $"{Name} ({Id}): {CommandLine}";
-        }
+        public override string ToString() => $"{Name} ({Id}): {CommandLine}";
+        public MacroItem Clone() => MemberwiseClone() as MacroItem;
     }
 
     class Macros
     {
-        private static List<MacroItem> macroItems = new List<MacroItem>();
+        private static List<MacroItem> mainMacroItems = new List<MacroItem>();
+        private static List<MacroItem> tempMacroItems = new List<MacroItem>();
         private static bool isDirty = false;
 
         public static void Load()
         {
-            
+
         }
 
         public static void Save()
@@ -44,7 +43,7 @@ namespace InazumaWpf
             newmac.Id = createNewUniqieId();
             newmac.Name = $"New Item";
             newmac.CommandLine = "Echo New Item (Re-Write me!)";
-            macroItems.Add(newmac);
+            tempMacroItems.Add(newmac);
             return newmac;
 
             string createNewUniqieId()
@@ -52,7 +51,7 @@ namespace InazumaWpf
                 for (int i = 0; ; i++)
                 {
                     string id = "m" + i.ToString();
-                    if (macroItems.Any(s => s.Id == id)) continue;
+                    if (tempMacroItems.Any(s => s.Id == id)) continue;
                     return id;
                 }
             }
@@ -65,14 +64,28 @@ namespace InazumaWpf
 
         }
 
-        public static IEnumerable<MacroItem> EnumMacroEntry()
+        public static IEnumerable<MacroItem> EnumMacroEntry() => tempMacroItems;
+
+        public static IEnumerable<MacroItem> EnumMainMacroEntry() => mainMacroItems;
+
+        private static void copy(List<MacroItem> src, List<MacroItem> dst)
         {
-            return macroItems;
+            dst.Clear();
+            foreach (var item in src)
+            {
+                dst.Add(item.Clone());
+            }
         }
 
+        public static void CopyMainToTemp()
+        {
+            copy(mainMacroItems, tempMacroItems);
+        }
 
-
-
+        public static void CopyTempToMain()
+        {
+            copy(tempMacroItems, mainMacroItems);
+        }
     }
 
     class WpfUtil
