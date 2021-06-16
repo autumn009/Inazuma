@@ -46,6 +46,17 @@ namespace InazumaWpf
         {
             var diaglog = new MacroEditorMain();
             diaglog.ShowDialog();
+            updateCombo();
+        }
+
+        private void updateCombo()
+        {
+            ComboBoxMacros.Items.Clear();
+            foreach (var item in Macros.EnumMainMacroEntry())
+            {
+                ComboBoxMacros.Items.Add(item);
+            }
+            if (ComboBoxMacros.Items.Count > 0) ComboBoxMacros.SelectedIndex = 0;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -54,6 +65,7 @@ namespace InazumaWpf
             if (r == null)
             {
                 Macros.CopyTempToMain();
+                updateCombo();
                 return;
             }
             MessageBox.Show(this, r);
