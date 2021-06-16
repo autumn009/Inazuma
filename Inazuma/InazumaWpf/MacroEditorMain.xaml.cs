@@ -78,8 +78,8 @@ namespace InazumaWpf
             if (item != null)
             {
                 Selection = item;
-                TextBoxName.Text = item.Name;
-                TextBoxCommandLine.Text = item.CommandLine;
+                TextBoxName.SelectedText = item.Name;
+                TextBoxCommandLine.SelectedText = item.CommandLine;
                 CheckBoxIsDefaultEncoding.IsChecked = item.IsDefaultEncoding;
             }
             else
