@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InazumaWpf"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="Inazuma" Height="450" Width="800" Background="Transparent">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure">
         <ComboBox Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>

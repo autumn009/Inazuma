@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,16 +31,23 @@ namespace InazumaWpf
         {
             if (Selection != null)
             {
-                Selection.Name = TextBoxName.Text;
-                Selection.CommandLine = TextBoxCommandLine.Text;
-                Selection.IsDefaultEncoding = CheckBoxIsDefaultEncoding.IsChecked == true;
-                Macros.SetDirty();
-                ListBoxMacros.Items.Refresh();
+                if (Selection.Name != TextBoxName.Text
+                || Selection.CommandLine != TextBoxCommandLine.Text
+                || Selection.IsDefaultEncoding != (CheckBoxIsDefaultEncoding.IsChecked == true))
+                {
+                    Selection.Name = TextBoxName.Text;
+                    Selection.CommandLine = TextBoxCommandLine.Text;
+                    Selection.IsDefaultEncoding = CheckBoxIsDefaultEncoding.IsChecked == true;
+                    Macros.SetDirty();
+                    ListBoxMacros.Items.Refresh();
+                }
             }
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
+            updateItem();
+            Macros.Save();
             Macros.CopyTempToMain();
             Close();
         }

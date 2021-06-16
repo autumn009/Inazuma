@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Xml.Serialization;
 using Inazuma;
 
 namespace InazumaWpf
 {
 
-    class MacroItem
+    public class MacroItem
     {
         public string Id;
         public string Name;
@@ -28,13 +31,43 @@ namespace InazumaWpf
         private static List<MacroItem> tempMacroItems = new List<MacroItem>();
         private static bool isDirty = false;
 
-        public static void Load()
+        private static string fileName()
         {
+            var path = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            return Path.Combine(path, "macros.xml")
+;        }
 
+        public static string Load()
+        {
+            try
+            {
+
+                XmlSerializer ser = new XmlSerializer(typeof(List<MacroItem>));
+                var stream = new FileStream(fileName(), FileMode.Open);
+                tempMacroItems = (List<MacroItem>)ser.Deserialize(stream);
+                stream.Close();
+                return null;
+            }
+            catch( FileNotFoundException)
+            {
+                tempMacroItems = new List<MacroItem>();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString(); 
+            }
         }
 
         public static void Save()
         {
+            if (!isDirty) return;
+
+            XmlSerializer ser = new XmlSerializer(typeof(List<MacroItem>));
+            TextWriter writer = new StreamWriter(fileName());
+            ser.Serialize(writer, tempMacroItems);
+            writer.Close();
+            isDirty = false;
         }
 
         public static MacroItem AddMacroEntry()
@@ -44,6 +77,7 @@ namespace InazumaWpf
             newmac.Name = $"New Item";
             newmac.CommandLine = "Echo New Item (Re-Write me!)";
             tempMacroItems.Add(newmac);
+            isDirty = true;
             return newmac;
 
             string createNewUniqieId()

@@ -47,5 +47,17 @@ namespace InazumaWpf
             var diaglog = new MacroEditorMain();
             diaglog.ShowDialog();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var r = Macros.Load();
+            if (r == null)
+            {
+                Macros.CopyTempToMain();
+                return;
+            }
+            MessageBox.Show(this, r);
+
+        }
     }
 }
