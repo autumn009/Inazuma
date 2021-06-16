@@ -71,5 +71,13 @@ namespace InazumaWpf
             MessageBox.Show(this, r);
 
         }
+
+        private void ComboBoxMacros_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = ComboBoxMacros.SelectedItem as MacroItem;
+            if (item == null) return;
+            TextBoxCommandLine.Text = item.CommandLine;
+            TextBoxCommandLine.SelectAll();
+        }
     }
 }
