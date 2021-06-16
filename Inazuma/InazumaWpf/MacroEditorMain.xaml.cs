@@ -62,11 +62,13 @@ namespace InazumaWpf
 
         private void ButtonRemove_Click(object sender, RoutedEventArgs e)
         {
+            var selectedIndex = ListBoxMacros.SelectedIndex;
             var selectedItem = ListBoxMacros.SelectedItem as MacroItem;
             if (selectedItem == null) return;
             Selection = null;
             ListBoxMacros.Items.Remove(selectedItem);
             Macros.RemoveMacroEntry(selectedItem.Id);
+            if (selectedIndex < ListBoxMacros.Items.Count) ListBoxMacros.SelectedIndex = selectedIndex;
         }
 
         private void ListBoxMacros_SelectionChanged(object sender, SelectionChangedEventArgs e)
