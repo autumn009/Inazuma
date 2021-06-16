@@ -24,6 +24,20 @@ namespace InazumaWpf
             InitializeComponent();
         }
 
+        MacroItem Selection = null;
+
+        private void updateItem()
+        {
+            if (Selection != null)
+            {
+                Selection.Name = TextBoxName.Text;
+                Selection.CommandLine = TextBoxCommandLine.Text;
+                Selection.IsDefaultEncoding = CheckBoxIsDefaultEncoding.IsChecked == true;
+                Macros.SetDirty();
+                ListBoxMacros.Items.Refresh();
+            }
+        }
+
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
 
@@ -48,17 +62,15 @@ namespace InazumaWpf
             MacroItem item = ListBoxMacros.SelectedItem as MacroItem;
             if (item != null)
             {
+                Selection = item;
                 TextBoxName.Text = item.Name;
                 TextBoxCommandLine.Text = item.CommandLine;
                 CheckBoxIsDefaultEncoding.IsChecked = item.IsDefaultEncoding;
-                return;
             }
-        }
-
-        private void updateItem()
-        {
-            // TBW
-            //throw new NotImplementedException();
+            else
+            {
+                Selection = null;
+            }
         }
     }
 }

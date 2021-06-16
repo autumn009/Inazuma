@@ -27,6 +27,7 @@ namespace InazumaWpf
     class Macros
     {
         private static List<MacroItem> macroItems = new List<MacroItem>();
+        private static bool isDirty = false;
 
         public static void Load()
         {
@@ -56,6 +57,8 @@ namespace InazumaWpf
                 }
             }
         }
+
+        public static void SetDirty() => isDirty = true;
 
         public static void RemoveMacroEntry(string id)
         {
