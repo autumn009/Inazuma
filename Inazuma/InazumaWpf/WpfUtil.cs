@@ -89,7 +89,7 @@ namespace InazumaWpf
             newmac.CommandLine = "Echo (Re-Write me!)";
             newmac.IsDefaultEncoding = false;
             newmac.LastUse = DateTime.Now;
-            tempMacroItems.Add(newmac);
+            tempMacroItems.Insert(0,newmac);
             isDirty = true;
             return newmac;
 
