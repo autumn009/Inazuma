@@ -62,7 +62,11 @@ namespace InazumaWpf
 
         private void ButtonRemove_Click(object sender, RoutedEventArgs e)
         {
-
+            var selectedItem = ListBoxMacros.SelectedItem as MacroItem;
+            if (selectedItem == null) return;
+            Selection = null;
+            ListBoxMacros.Items.Remove(selectedItem);
+            Macros.RemoveMacroEntry(selectedItem.Id);
         }
 
         private void ListBoxMacros_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -84,11 +88,20 @@ namespace InazumaWpf
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Selection = null;
+            TextBoxName.Text = "";
+            TextBoxCommandLine.Text = "";
+            CheckBoxIsDefaultEncoding.IsChecked = false;
+
             Macros.CopyMainToTemp();
             ListBoxMacros.Items.Clear();
             foreach (var item in Macros.EnumMacroEntry())
             {
                 ListBoxMacros.Items.Add(item);
+            }
+            if(ListBoxMacros.Items.Count>0)
+            {
+                ListBoxMacros.SelectedIndex = 0;
             }
         }
     }

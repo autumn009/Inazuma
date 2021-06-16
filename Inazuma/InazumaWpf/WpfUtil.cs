@@ -95,7 +95,8 @@ namespace InazumaWpf
 
         public static void RemoveMacroEntry(string id)
         {
-
+            var item = tempMacroItems.FirstOrDefault(s => s.Id == id);
+            if (item != null) tempMacroItems.Remove(item);
         }
 
         public static IEnumerable<MacroItem> EnumMacroEntry() => tempMacroItems;
