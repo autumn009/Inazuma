@@ -9,13 +9,14 @@
         Title="Inazuma" Height="450" Width="800" Background="Transparent">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure">
         <ComboBox Name="ComboBoxMacros" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="ComboBoxMacros_SelectionChanged"/>
-        <TextBox Name="TextBoxCommandLine" Margin="130,0,110,0" Height="28" VerticalAlignment="Top"/>
+        <TextBox Name="TextBoxCommandLine" Margin="130,0,170,0" Height="28" VerticalAlignment="Top"/>
         <Button Name="ButtonEditMacros" Click="ButtonEditMacros_Click"  Width="100" Content="Edit Macros" HorizontalAlignment="Right" VerticalAlignment="Top" Height="22"/>
-        <TextBox Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0"/>
+        <CheckBox Name="CheckBoxDefaultEncoding" HorizontalAlignment="Right" Margin="0,0,100,0">DEF ENC</CheckBox>
+        <TextBox Name="TextBoxSrc" Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,175,0,0">
             <Button Content="Working Dir" Margin="5,0,0,0"/>
             <Button Content="Paste Source" Margin="5,0,0,0"/>
-            <Button Content="Run Procedure" Margin="5,0,0,0"/>
+            <Button Name="ButtonRun" Click="ButtonRun_Click" Content="Run Procedure" Margin="5,0,0,0"/>
             <Button Content="Copy Result" Margin="5,0,0,0"/>
             <Button Content="Paste And Run Procedure" Margin="5,0,0,0"/>
             <Label Content="Inazuma Procedural Text Editor by autumn" FontStyle="Italic" FontWeight="Black"></Label>
@@ -26,7 +27,7 @@
             <Label Content="FULLPATH HERE" Margin="0,-4,0,-4"/>
 
         </StackPanel>
-        <TextBox Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,225,0,0"/>
+        <TextBox Name="TextBoxDst" Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,225,0,0"/>
 
 
 

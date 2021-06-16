@@ -1,7 +1,9 @@
 ﻿using Inazuma;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,6 +80,46 @@ namespace InazumaWpf
             if (item == null) return;
             TextBoxCommandLine.Text = item.CommandLine;
             TextBoxCommandLine.SelectAll();
+            CheckBoxDefaultEncoding.IsChecked = item.IsDefaultEncoding;
+        }
+
+        private async Task executeAsync(string commandLine, bool useDefaultEncoding)
+        {
+            System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+            if (useDefaultEncoding) encoding = System.Text.Encoding.Default;
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.Arguments = $"/C {commandLine}";
+            //p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            //p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.StandardErrorEncoding = encoding;
+            p.StartInfo.StandardOutputEncoding = encoding;
+            //p.StartInfo.StandardInputEncoding = encoding;
+            p.EnableRaisingEvents = true;
+            p.Start();
+            //StreamWriter myStreamWriter = p.StandardInput;
+            //Task taskToInput = myStreamWriter.WriteAsync(TextBoxSrc.Text);
+            Task<string> taskToOutout = p.StandardOutput.ReadToEndAsync();
+            Task<string> taskToError = p.StandardError.ReadToEndAsync();
+            p.WaitForExit();
+            //await taskToInput;
+            var output = taskToOutout.Result;
+            var error = taskToError.Result;
+            if (error.Trim().Length > 0)
+                TextBoxDst.Text = output + "\r\n\r\nError Output:\r\n" + error;
+            else
+                TextBoxDst.Text = output;
+        }
+
+        private async void ButtonRun_Click(object sender, RoutedEventArgs e)
+        {
+            var old = this.Cursor;
+            this.Cursor = Cursors.Wait;
+            await executeAsync(TextBoxCommandLine.Text, CheckBoxDefaultEncoding.IsChecked == true );
+            this.Cursor = old;
         }
     }
 }
