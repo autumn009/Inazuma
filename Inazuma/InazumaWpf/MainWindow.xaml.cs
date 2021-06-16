@@ -104,7 +104,7 @@ namespace InazumaWpf
             Task taskToInput = myStreamWriter.WriteAsync(TextBoxSrc.Text);
             Task<string> taskToOutout = p.StandardOutput.ReadToEndAsync();
             Task<string> taskToError = p.StandardError.ReadToEndAsync();
-            p.WaitForExit();
+            await p.WaitForExitAsync();
             await taskToInput;
             var output = taskToOutout.Result;
             var error = taskToError.Result;

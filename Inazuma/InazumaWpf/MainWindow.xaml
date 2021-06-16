@@ -12,7 +12,7 @@
         <TextBox Name="TextBoxCommandLine" Margin="130,0,170,0" Height="28" VerticalAlignment="Top"/>
         <Button Name="ButtonEditMacros" Click="ButtonEditMacros_Click"  Width="100" Content="Edit Macros" HorizontalAlignment="Right" VerticalAlignment="Top" Height="22"/>
         <CheckBox Name="CheckBoxDefaultEncoding" HorizontalAlignment="Right" Margin="0,0,100,0">DEF ENC</CheckBox>
-        <TextBox Name="TextBoxSrc" Text="" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0"/>
+        <TextBox Name="TextBoxSrc" Text="" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0" FontFamily="MS Gothic" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,175,0,0">
             <Button Content="Working Dir" Margin="5,0,0,0"/>
             <Button Content="Paste Source" Margin="5,0,0,0"/>
@@ -27,7 +27,7 @@
             <Label Content="FULLPATH HERE" Margin="0,-4,0,-4"/>
 
         </StackPanel>
-        <TextBox Name="TextBoxDst" Text="" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,225,0,0"/>
+        <TextBox Name="TextBoxDst" Text="" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,225,0,0" FontFamily="MS Gothic"/>
 
 
 
