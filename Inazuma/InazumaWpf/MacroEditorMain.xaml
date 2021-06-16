@@ -14,9 +14,9 @@
     <Grid>
         <Label Content="dummy" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
         <ListBox Name="ListBoxMacros" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0" Height="200" SelectionChanged="ListBoxMacros_SelectionChanged"/>
-        <TextBox Name="TextBoxName" Text="NAME HERE" Margin="2,205,2,0" Height="20" VerticalAlignment="Top"/>
-        <TextBox Name="TextBoxCommandLine" Text="COMMAND LINE HERE" Margin="2,230,2,0" Height="20" VerticalAlignment="Top"/>
-        <CheckBox Name="CheckBoxIsDefaultEncoding" Margin="2,255,2,0">Use System Default Legacy Encoding(like Shift-JIS) Insead of UTF-8</CheckBox>
+        <TextBox Name="TextBoxName" Text="NAME HERE" Margin="2,205,2,0" Height="20" VerticalAlignment="Top" LostFocus="TextBoxName_LostFocus"/>
+        <TextBox Name="TextBoxCommandLine" Text="COMMAND LINE HERE" Margin="2,230,2,0" Height="20" VerticalAlignment="Top" LostFocus="TextBoxCommandLine_LostFocus"/>
+        <CheckBox Name="CheckBoxIsDefaultEncoding" Margin="2,255,2,0" LostFocus="CheckBoxIsDefaultEncoding_LostFocus">Use System Default Legacy Encoding(like Shift-JIS) Insead of UTF-8</CheckBox>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="2,270,2,0">
             <Button Name="ButtonAddNew" Click="ButtonAddNew_Click" Content="Add New Entry..." Margin="2,0,2,0"></Button>
             <Button Name="ButtonRemove" Click="ButtonRemove_Click" Content="Remove Entry..." Margin="2,0,2,0"></Button>

@@ -108,5 +108,20 @@ namespace InazumaWpf
                 ListBoxMacros.SelectedIndex = 0;
             }
         }
+
+        private void TextBoxName_LostFocus(object sender, RoutedEventArgs e)
+        {
+            updateItem();
+        }
+
+        private void TextBoxCommandLine_LostFocus(object sender, RoutedEventArgs e)
+        {
+            updateItem();
+        }
+
+        private void CheckBoxIsDefaultEncoding_LostFocus(object sender, RoutedEventArgs e)
+        {
+            updateItem();
+        }
     }
 }
