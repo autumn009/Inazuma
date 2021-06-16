@@ -34,8 +34,18 @@ namespace InazumaWpf
         private static string fileName()
         {
             var path = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            return Path.Combine(path, "macros.xml")
-;        }
+            return Path.Combine(path, "macros.xml");
+        }
+
+        public static void SortListByDate(List<MacroItem> list)
+        {
+            // SORT WITH NEW ITEM FIRST
+            list.Sort(delegate (MacroItem x, MacroItem y)
+            {
+                long diff = y.LastUse.Ticks - x.LastUse.Ticks;
+                return Math.Sign(diff);
+            });
+        }
 
         public static string Load()
         {
@@ -46,6 +56,7 @@ namespace InazumaWpf
                 var stream = new FileStream(fileName(), FileMode.Open);
                 tempMacroItems = (List<MacroItem>)ser.Deserialize(stream);
                 stream.Close();
+                SortListByDate(tempMacroItems);
                 return null;
             }
             catch( FileNotFoundException)
@@ -75,7 +86,9 @@ namespace InazumaWpf
             var newmac = new MacroItem();
             newmac.Id = createNewUniqieId();
             newmac.Name = $"New Item";
-            newmac.CommandLine = "Echo New Item (Re-Write me!)";
+            newmac.CommandLine = "Echo (Re-Write me!)";
+            newmac.IsDefaultEncoding = false;
+            newmac.LastUse = DateTime.Now;
             tempMacroItems.Add(newmac);
             isDirty = true;
             return newmac;
