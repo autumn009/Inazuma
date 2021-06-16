@@ -94,18 +94,18 @@ namespace InazumaWpf
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
-            //p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.RedirectStandardInput = true;
             p.StartInfo.StandardErrorEncoding = encoding;
             p.StartInfo.StandardOutputEncoding = encoding;
-            //p.StartInfo.StandardInputEncoding = encoding;
+            p.StartInfo.StandardInputEncoding = encoding;
             p.EnableRaisingEvents = true;
             p.Start();
-            //StreamWriter myStreamWriter = p.StandardInput;
-            //Task taskToInput = myStreamWriter.WriteAsync(TextBoxSrc.Text);
+            StreamWriter myStreamWriter = p.StandardInput;
+            Task taskToInput = myStreamWriter.WriteAsync(TextBoxSrc.Text);
             Task<string> taskToOutout = p.StandardOutput.ReadToEndAsync();
             Task<string> taskToError = p.StandardError.ReadToEndAsync();
             p.WaitForExit();
-            //await taskToInput;
+            await taskToInput;
             var output = taskToOutout.Result;
             var error = taskToError.Result;
             if (error.Trim().Length > 0)
