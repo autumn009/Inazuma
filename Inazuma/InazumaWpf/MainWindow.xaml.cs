@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -61,8 +62,16 @@ namespace InazumaWpf
             if (ComboBoxMacros.Items.Count > 0) ComboBoxMacros.SelectedIndex = 0;
         }
 
+        private void updateVersion()
+        {
+            AssemblyName name = Assembly.GetExecutingAssembly().GetName();
+            LabelVersion.Text = $"Version {name.Version}";
+        }
+
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            updateVersion();
             try
             {
                 Directory.SetCurrentDirectory(InazumaWpf.Properties.Settings.Default.workingDir);
