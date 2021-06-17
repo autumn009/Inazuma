@@ -131,7 +131,20 @@ namespace InazumaWpf
 
         private void ButtonSetDir_Click(object sender, RoutedEventArgs e)
         {
+            var dlg = new Microsoft.WindowsAPICodePack.Dialogs.CommonOpenFileDialog();
 
+            // フォルダ選択ダイアログ（falseにするとファイル選択ダイアログ）
+            dlg.IsFolderPicker = true;
+            // タイトル
+            dlg.Title = "Select Working Directory";
+            // 初期ディレクトリ
+            dlg.InitialDirectory = LabelWorkingDir.Text;
+
+            if (dlg.ShowDialog() == Microsoft.WindowsAPICodePack.Dialogs.CommonFileDialogResult.Ok)
+            {
+                Directory.SetCurrentDirectory(dlg.FileName);
+                updateWorkingDirectory();
+            }
         }
     }
 }
