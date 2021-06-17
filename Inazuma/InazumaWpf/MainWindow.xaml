@@ -8,16 +8,18 @@
         Loaded="Window_Loaded"
         Title="Inazuma" Height="450" Width="800" Background="Transparent">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure">
-        <ComboBox Name="ComboBoxMacros" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="ComboBoxMacros_SelectionChanged"/>
-        <TextBox Name="TextBoxCommandLine" Margin="130,0,170,0" Height="28" VerticalAlignment="Top" ToolTip="Command to Execute"/>
-        <Button Name="ButtonEditMacros" Click="ButtonEditMacros_Click"  Width="100" Content="Edit Macros" HorizontalAlignment="Right" VerticalAlignment="Top" Height="22"/>
-        <CheckBox Name="CheckBoxDefaultEncoding" HorizontalAlignment="Right" Margin="0,0,100,0">DEF ENC</CheckBox>
+        <Label Content="_Macro:" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+        <ComboBox Name="ComboBoxMacros" Width="120" Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="ComboBoxMacros_SelectionChanged"/>
+        <Label Content="_Command:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,0,0,0"></Label>
+        <TextBox Name="TextBoxCommandLine" Margin="250,0,170,0" Height="28" VerticalAlignment="Top" ToolTip="Command to Execute"/>
+        <Button Name="ButtonEditMacros" Click="ButtonEditMacros_Click"  Width="100" Content="_Edit Macros" HorizontalAlignment="Right" VerticalAlignment="Top" Height="22"/>
+        <CheckBox Name="CheckBoxDefaultEncoding" HorizontalAlignment="Right" Margin="0,0,100,0">_DEF ENC</CheckBox>
         <TextBox Name="TextBoxSrc" Text="" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0" FontFamily="MS Gothic" ToolTip="Text Standard Input"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,175,0,0">
             <Button Name="ButtonSetDir" Click="ButtonSetDir_Click" Content="_Working Dir" Margin="5,0,0,0"/>
             <Button Name="ButtonPasteSrc" Click="ButtonPasteSrc_Click" Content="_Paste Source" Margin="5,0,0,0"/>
             <Button Name="ButtonRun" Click="ButtonRun_Click" Content="_Run↓" Margin="5,0,0,0" IsDefault="True" FontSize="20" Width="80"/>
-            <Button Name="ButtonCopyDst" Click="ButtonCopyDst_Click" Content="_Copy Result" Margin="5,0,0,0"/>
+            <Button Name="ButtonCopyDst" Click="ButtonCopyDst_Click" Content="Cop_y Result" Margin="5,0,0,0"/>
             <TextBlock Text="Inazuma Procedural Text Editor by autumn" FontStyle="Italic" FontWeight="Black" Margin="18,6,0,0"></TextBlock>
             <TextBlock x:Name="LabelVersion" Text="Version X.X" FontStyle="Italic" FontWeight="Black" Margin="6,6,0,0"></TextBlock>
         </StackPanel>
