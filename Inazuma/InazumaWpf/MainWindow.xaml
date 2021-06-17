@@ -14,7 +14,7 @@
         <CheckBox Name="CheckBoxDefaultEncoding" HorizontalAlignment="Right" Margin="0,0,100,0">DEF ENC</CheckBox>
         <TextBox Name="TextBoxSrc" Text="" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0" FontFamily="MS Gothic" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,175,0,0">
-            <Button Content="Working Dir" Margin="5,0,0,0"/>
+            <Button Name="ButtonSetDir" Click="ButtonSetDir_Click" Content="Working Dir" Margin="5,0,0,0"/>
             <Button Content="Paste Source" Margin="5,0,0,0"/>
             <Button Name="ButtonRun" Click="ButtonRun_Click" Content="Run Procedure" Margin="5,0,0,0" IsDefault="True"/>
             <Button Content="Copy Result" Margin="5,0,0,0"/>
@@ -24,7 +24,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,205,0,0">
             <Label Content="Working Dir:" Margin="5,-4,0,-4" FontWeight="Bold"/>
-            <Label Content="FULLPATH HERE" Margin="0,-4,0,-4"/>
+            <TextBlock Name="LabelWorkingDir" Text="FULLPATH HERE" Margin="0,1,0,0"/>
 
         </StackPanel>
         <TextBox Name="TextBoxDst" Text="" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,225,0,0" FontFamily="MS Gothic"/>

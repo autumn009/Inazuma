@@ -63,14 +63,15 @@ namespace InazumaWpf
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            updateWorkingDirectory();
             var r = Macros.Load();
             if (r == null)
             {
                 Macros.CopyTempToMain();
                 updateCombo();
-                return;
             }
-            MessageBox.Show(this, r);
+            else
+                MessageBox.Show(this, r);
 
         }
 
@@ -121,6 +122,16 @@ namespace InazumaWpf
             this.Cursor = Cursors.Wait;
             await executeAsync(TextBoxCommandLine.Text, CheckBoxDefaultEncoding.IsChecked == true );
             this.Cursor = old;
+        }
+
+        private void updateWorkingDirectory()
+        {
+            LabelWorkingDir.Text = Directory.GetCurrentDirectory();
+        }
+
+        private void ButtonSetDir_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
