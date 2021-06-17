@@ -127,6 +127,11 @@ namespace InazumaWpf
         private async void ButtonRun_Click(object sender, RoutedEventArgs e)
         {
             var old = this.Cursor;
+            if (string.IsNullOrEmpty(TextBoxSrc.Text) && Clipboard.ContainsText())
+            {
+                TextBoxSrc.Text = Clipboard.GetText();
+                TextBoxSrc.SelectAll();
+            }
             this.Cursor = Cursors.Wait;
             await executeAsync(TextBoxCommandLine.Text, CheckBoxDefaultEncoding.IsChecked == true);
             this.Cursor = old;
