@@ -63,6 +63,14 @@ namespace InazumaWpf
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Directory.SetCurrentDirectory(InazumaWpf.Properties.Settings.Default.workingDir);
+            }
+            catch(Exception)
+            {
+                // nop
+            }
             updateWorkingDirectory();
             var r = Macros.Load();
             if (r == null)
@@ -143,6 +151,8 @@ namespace InazumaWpf
             if (dlg.ShowDialog() == Microsoft.WindowsAPICodePack.Dialogs.CommonFileDialogResult.Ok)
             {
                 Directory.SetCurrentDirectory(dlg.FileName);
+                InazumaWpf.Properties.Settings.Default.workingDir = dlg.FileName;
+                InazumaWpf.Properties.Settings.Default.Save();
                 updateWorkingDirectory();
             }
         }
