@@ -16,7 +16,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,175,0,0">
             <Button Content="Working Dir" Margin="5,0,0,0"/>
             <Button Content="Paste Source" Margin="5,0,0,0"/>
-            <Button Name="ButtonRun" Click="ButtonRun_Click" Content="Run Procedure" Margin="5,0,0,0"/>
+            <Button Name="ButtonRun" Click="ButtonRun_Click" Content="Run Procedure" Margin="5,0,0,0" IsDefault="True"/>
             <Button Content="Copy Result" Margin="5,0,0,0"/>
             <Button Content="Paste And Run Procedure" Margin="5,0,0,0"/>
             <Label Content="Inazuma Procedural Text Editor by autumn" FontStyle="Italic" FontWeight="Black"></Label>
