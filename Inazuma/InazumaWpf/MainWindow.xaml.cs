@@ -67,7 +67,7 @@ namespace InazumaWpf
             {
                 Directory.SetCurrentDirectory(InazumaWpf.Properties.Settings.Default.workingDir);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 // nop
             }
@@ -128,7 +128,7 @@ namespace InazumaWpf
         {
             var old = this.Cursor;
             this.Cursor = Cursors.Wait;
-            await executeAsync(TextBoxCommandLine.Text, CheckBoxDefaultEncoding.IsChecked == true );
+            await executeAsync(TextBoxCommandLine.Text, CheckBoxDefaultEncoding.IsChecked == true);
             this.Cursor = old;
         }
 
@@ -155,6 +155,29 @@ namespace InazumaWpf
                 InazumaWpf.Properties.Settings.Default.Save();
                 updateWorkingDirectory();
             }
+        }
+
+        private void ButtonPasteSrc_Click(object sender, RoutedEventArgs e)
+        {
+            if (Clipboard.ContainsText())
+            {
+                TextBoxSrc.Text = Clipboard.GetText();
+                TextBoxSrc.SelectAll();
+            }
+            else
+                Console.Beep();
+        }
+
+        private void ButtonCopyDst_Click(object sender, RoutedEventArgs e)
+        {
+            var text = TextBoxDst.SelectedText;
+            if (string.IsNullOrEmpty(text)) text = TextBoxDst.Text;
+            if (string.IsNullOrEmpty(text))
+            {
+                Console.Beep();
+            }
+            Clipboard.Clear();
+            Clipboard.SetText(text);
         }
     }
 }
