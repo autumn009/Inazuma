@@ -14,10 +14,10 @@
         <CheckBox Name="CheckBoxDefaultEncoding" HorizontalAlignment="Right" Margin="0,0,100,0">DEF ENC</CheckBox>
         <TextBox Name="TextBoxSrc" Text="" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0" FontFamily="MS Gothic" ToolTip="Text Standard Input"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,175,0,0">
-            <Button Name="ButtonSetDir" Click="ButtonSetDir_Click" Content="Working Dir" Margin="5,0,0,0"/>
-            <Button Name="ButtonPasteSrc" Click="ButtonPasteSrc_Click" Content="Paste Source" Margin="5,0,0,0"/>
-            <Button Name="ButtonRun" Click="ButtonRun_Click" Content="Run Procedure" Margin="5,0,0,0" IsDefault="True"/>
-            <Button Name="ButtonCopyDst" Click="ButtonCopyDst_Click" Content="Copy Result" Margin="5,0,0,0"/>
+            <Button Name="ButtonSetDir" Click="ButtonSetDir_Click" Content="_Working Dir" Margin="5,0,0,0"/>
+            <Button Name="ButtonPasteSrc" Click="ButtonPasteSrc_Click" Content="_Paste Source" Margin="5,0,0,0"/>
+            <Button Name="ButtonRun" Click="ButtonRun_Click" Content="_Run↓" Margin="5,0,0,0" IsDefault="True" FontSize="20" Width="80"/>
+            <Button Name="ButtonCopyDst" Click="ButtonCopyDst_Click" Content="_Copy Result" Margin="5,0,0,0"/>
             <Label Content="Inazuma Procedural Text Editor by autumn" FontStyle="Italic" FontWeight="Black"></Label>
             <Label x:Name="LabelVersion" Content="Version X.X" FontStyle="Italic" FontWeight="Black"></Label>
         </StackPanel>
