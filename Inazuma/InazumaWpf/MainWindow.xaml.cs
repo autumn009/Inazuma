@@ -90,7 +90,7 @@ namespace InazumaWpf
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.Arguments = $"/C {commandLine}";
-            //p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.CreateNoWindow = true;
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
@@ -104,8 +104,9 @@ namespace InazumaWpf
             Task taskToInput = myStreamWriter.WriteAsync(TextBoxSrc.Text);
             Task<string> taskToOutout = p.StandardOutput.ReadToEndAsync();
             Task<string> taskToError = p.StandardError.ReadToEndAsync();
-            await p.WaitForExitAsync();
             await taskToInput;
+            myStreamWriter.Close();
+            await p.WaitForExitAsync();
             var output = taskToOutout.Result;
             var error = taskToError.Result;
             if (error.Trim().Length > 0)
