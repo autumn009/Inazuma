@@ -55,7 +55,7 @@ namespace InazumaWpf
         private void updateCombo()
         {
             ComboBoxMacros.Items.Clear();
-            foreach (var item in Macros.EnumMainMacroEntry())
+            foreach (var item in Macros.EnumMainMacroEntry().OrderByDescending(c => c.LastUse))
             {
                 ComboBoxMacros.Items.Add(item);
             }
@@ -143,6 +143,14 @@ namespace InazumaWpf
             }
             this.Cursor = Cursors.Wait;
             await executeAsync(TextBoxCommandLine.Text, CheckBoxDefaultEncoding.IsChecked == true);
+            var item = ComboBoxMacros.SelectedItem as MacroItem;
+            if (item != null)
+            {
+                item.LastUse = DateTime.Now;
+                Macros.SetDirty();
+                Macros.CopyMainToTemp();
+                Macros.Save();
+            }
             this.Cursor = old;
         }
 
