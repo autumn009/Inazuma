@@ -151,6 +151,8 @@ namespace InazumaWpf
                 Macros.CopyMainToTemp();
                 Macros.Save();
             }
+            updateCombo();
+            ComboBoxMacros.SelectedItem = item;
             this.Cursor = old;
         }
 
