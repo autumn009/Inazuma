@@ -33,7 +33,8 @@ namespace InazumaWpf
 
         private static string fileName()
         {
-            var path = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var path = Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"Pie Dey\\Inazuma");
+            Directory.CreateDirectory(path);
             return Path.Combine(path, "macros.xml");
         }
 
