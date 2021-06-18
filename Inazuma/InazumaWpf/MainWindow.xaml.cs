@@ -6,6 +6,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,6 +32,7 @@ namespace InazumaWpf
         public MainWindow()
         {
             InitializeComponent();
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -100,11 +103,14 @@ namespace InazumaWpf
             TextBoxCommandLine.SelectAll();
             CheckBoxDefaultEncoding.IsChecked = item.IsDefaultEncoding;
         }
+        [DllImport("kernel32.dll")]
+        [ResourceExposure(ResourceScope.None)]
+        internal static extern int GetACP();
 
         private async Task executeAsync(string commandLine, bool useDefaultEncoding)
         {
             System.Text.Encoding encoding = System.Text.Encoding.UTF8;
-            if (useDefaultEncoding) encoding = System.Text.Encoding.Default;
+            if (useDefaultEncoding) encoding = System.Text.Encoding.GetEncoding(GetACP());
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.Arguments = $"/C {commandLine}";
