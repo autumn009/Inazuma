@@ -87,12 +87,15 @@ namespace InazumaWpf
             var r = Macros.Load();
             if (r == null)
             {
+                if (Macros.EnumMacroEntry().Count() == 0)
+                {
+                    PredefinedMacros.AddPredefinedMaros();
+                }
                 Macros.CopyTempToMain();
                 updateCombo();
             }
             else
                 MessageBox.Show(this, r);
-
         }
 
         private void ComboBoxMacros_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -110,23 +113,15 @@ namespace InazumaWpf
         private async Task executeAsync(string commandLine, bool useDefaultEncoding)
         {
             System.Diagnostics.Process p = new System.Diagnostics.Process();
-            string options = "";
+            int codePage = 65001;   // UTF-8
+
             if (useDefaultEncoding)
             {
-                var encoding = System.Text.Encoding.GetEncoding(GetACP());
-                p.StartInfo.StandardErrorEncoding = encoding;
-                p.StartInfo.StandardOutputEncoding = encoding;
-                p.StartInfo.StandardInputEncoding = encoding;
+                codePage = GetACP();
             }
-            else
-            {
-                p.StartInfo.StandardInputEncoding = System.Text.Encoding.Unicode;
-                p.StartInfo.StandardOutputEncoding = System.Text.Encoding.Unicode;
-                p.StartInfo.StandardErrorEncoding = System.Text.Encoding.Unicode;
-                options = "/u ";
-            }
+            var oldcp = Registory.SetCodePage(codePage);
             p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.Arguments = $"{options}/C {commandLine}";
+            p.StartInfo.Arguments = $"/C {commandLine}";
             p.StartInfo.CreateNoWindow = true;
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
@@ -143,6 +138,7 @@ namespace InazumaWpf
             await p.WaitForExitAsync();
             var output = taskToOutout.Result;
             var error = taskToError.Result;
+            Registory.SetCodePage(oldcp);
             if (error.Trim().Length > 0)
                 TextBoxDst.Text = output + "\r\n\r\nError Output:\r\n" + error;
             else
