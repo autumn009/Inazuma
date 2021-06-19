@@ -109,19 +109,29 @@ namespace InazumaWpf
 
         private async Task executeAsync(string commandLine, bool useDefaultEncoding)
         {
-            System.Text.Encoding encoding = System.Text.Encoding.UTF8;
-            if (useDefaultEncoding) encoding = System.Text.Encoding.GetEncoding(GetACP());
             System.Diagnostics.Process p = new System.Diagnostics.Process();
+            string options = "";
+            if (useDefaultEncoding)
+            {
+                var encoding = System.Text.Encoding.GetEncoding(GetACP());
+                p.StartInfo.StandardErrorEncoding = encoding;
+                p.StartInfo.StandardOutputEncoding = encoding;
+                p.StartInfo.StandardInputEncoding = encoding;
+            }
+            else
+            {
+                p.StartInfo.StandardInputEncoding = System.Text.Encoding.Unicode;
+                p.StartInfo.StandardOutputEncoding = System.Text.Encoding.Unicode;
+                p.StartInfo.StandardErrorEncoding = System.Text.Encoding.Unicode;
+                options = "/u ";
+            }
             p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.Arguments = $"/C {commandLine}";
+            p.StartInfo.Arguments = $"{options}/C {commandLine}";
             p.StartInfo.CreateNoWindow = true;
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.StandardErrorEncoding = encoding;
-            p.StartInfo.StandardOutputEncoding = encoding;
-            p.StartInfo.StandardInputEncoding = encoding;
             p.EnableRaisingEvents = true;
             p.Start();
             StreamWriter myStreamWriter = p.StandardInput;
