@@ -167,8 +167,20 @@ namespace InazumaWpf
                 Macros.CopyMainToTemp();
                 Macros.Save();
             }
+            string keepCommandLine = TextBoxCommandLine.Text;
+            bool? keepIsDefaultCodePage = CheckBoxDefaultEncoding.IsChecked;
             updateCombo();
-            ComboBoxMacros.SelectedItem = item;
+            TextBoxCommandLine.Text = keepCommandLine;
+            CheckBoxDefaultEncoding.IsChecked = keepIsDefaultCodePage;
+            foreach (var citem in ComboBoxMacros.Items)
+            {
+                var mItem = citem as MacroItemForMain;
+                if( mItem.ReferBody.Id == item.ReferBody.Id)
+                {
+                    ComboBoxMacros.SelectedItem = mItem;
+                    break;
+                }
+            }
             this.Cursor = old;
         }
 
