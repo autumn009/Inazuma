@@ -127,6 +127,9 @@ namespace InazumaWpf
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.StandardInputEncoding = System.Text.Encoding.GetEncoding(codePage);
+            p.StartInfo.StandardOutputEncoding = System.Text.Encoding.GetEncoding(codePage);
+            p.StartInfo.StandardErrorEncoding = System.Text.Encoding.GetEncoding(codePage);
             p.EnableRaisingEvents = true;
             p.Start();
             StreamWriter myStreamWriter = p.StandardInput;
