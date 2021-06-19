@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InazumaWpf"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Inazuma" Height="450" Width="800" Background="Transparent">
+        Title="Inazuma" Height="450" Width="800" Background="Transparent" Icon="/Icon.jpg">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure">
         <Label Content="_Macro:" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
         <ComboBox Name="ComboBoxMacros" Width="120" Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="ComboBoxMacros_SelectionChanged"/>
