@@ -12,14 +12,16 @@
         Loaded="Window_Loaded"
         >
     <Grid>
-        <Label Content="dummy" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-        <ListBox Name="ListBoxMacros" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0" Height="200" SelectionChanged="ListBoxMacros_SelectionChanged"/>
-        <TextBox Name="TextBoxName" Text="NAME HERE" Margin="2,205,2,0" Height="20" VerticalAlignment="Top" LostFocus="TextBoxName_LostFocus"/>
-        <TextBox Name="TextBoxCommandLine" Text="COMMAND LINE HERE" Margin="2,230,2,0" Height="20" VerticalAlignment="Top" LostFocus="TextBoxCommandLine_LostFocus"/>
-        <CheckBox Name="CheckBoxIsDefaultEncoding" Margin="2,255,2,0" LostFocus="CheckBoxIsDefaultEncoding_LostFocus">Use System Default Legacy Encoding(like Shift-JIS) Insead of UTF-8</CheckBox>
+        <Label Content="_Macros" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+        <ListBox Name="ListBoxMacros" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,20,0,0" Height="180" SelectionChanged="ListBoxMacros_SelectionChanged"/>
+        <Label Content="_Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,205,0,0"></Label>
+        <TextBox Name="TextBoxName" Text="NAME HERE" Margin="40,205,2,0" Height="20" VerticalAlignment="Top" LostFocus="TextBoxName_LostFocus"/>
+        <Label Content="_Command" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,230,0,0"></Label>
+        <TextBox Name="TextBoxCommandLine" Text="COMMAND LINE HERE" Margin="70,230,2,0" Height="20" VerticalAlignment="Top" LostFocus="TextBoxCommandLine_LostFocus"/>
+        <CheckBox Name="CheckBoxIsDefaultEncoding" Margin="2,255,2,0" LostFocus="CheckBoxIsDefaultEncoding_LostFocus">_Use System Default Legacy Encoding(like Shift-JIS) Insead of UTF-8</CheckBox>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="2,270,2,0">
-            <Button Name="ButtonAddNew" Click="ButtonAddNew_Click" Content="Add New Entry" Margin="2,0,2,0"></Button>
-            <Button Name="ButtonRemove" Click="ButtonRemove_Click" Content="Remove Entry" Margin="2,0,2,0"></Button>
+            <Button Name="ButtonAddNew" Click="ButtonAddNew_Click" Content="_Add New Entry" Margin="2,0,2,0"></Button>
+            <Button Name="ButtonRemove" Click="ButtonRemove_Click" Content="_Remove Entry" Margin="2,0,2,0"></Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
             <Button Name="ButtonOK" Click="ButtonOK_Click" IsDefault="True" Margin="2,0,2,3" Width="200">OK</Button>
