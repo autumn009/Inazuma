@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Inazuma;
+//using Inazuma;
 
 namespace InazumaWpf
 {
@@ -19,7 +19,7 @@ namespace InazumaWpf
             base.OnStartup(e);
             if( e.Args.Length >= 1)
             {
-                State.FileName = e.Args[0];
+                //State.FileName = e.Args[0];
             }
         }
     }

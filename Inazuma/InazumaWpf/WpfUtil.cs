@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Xml.Serialization;
-using Inazuma;
+//using Inazuma;
 
 namespace InazumaWpf
 {
