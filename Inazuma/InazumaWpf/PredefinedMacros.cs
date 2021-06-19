@@ -11,8 +11,8 @@ namespace InazumaWpf
     {
         public static void AddPredefinedMaros()
         {
-            add("grep", "grep \"SEARCH TEXT\"");
-            add("sort|uniq", "sort|uniq");
+            add("grep", "grep \"SEARCH TEXT\"", true);
+            add("sort|uniq", "sort|uniq", true);
             add("Current Directory", "CD");
             add("File Association", "ASSOC");
             add("Command Search Path", "PATH");
@@ -25,12 +25,12 @@ namespace InazumaWpf
             add("Volume Name", "VOL");
             add("Find String", "FIND \"SEARCH TEXT\"");
 
-            void add(string name, string commandLine)
+            void add(string name, string commandLine, bool isDefaultEncoding = true)
             {
                 var item = Macros.AddMacroEntry();
                 item.CommandLine = commandLine;
                 item.Name = name;
-                item.IsDefaultEncoding = true;
+                item.IsDefaultEncoding = isDefaultEncoding;
             }
         }
     }
