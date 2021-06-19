@@ -24,6 +24,15 @@ namespace InazumaWpf
         public override string ToString() => $"{Name} ({Id}): {CommandLine}";
         public MacroItem Clone() => MemberwiseClone() as MacroItem;
     }
+    public class MacroItemForMain
+    {
+        public MacroItem ReferBody;
+        public override string ToString() => ReferBody.Name;
+        public MacroItemForMain(MacroItem template)
+        {
+            ReferBody = template;
+        }
+    }
 
     class Macros
     {

@@ -60,7 +60,7 @@ namespace InazumaWpf
             ComboBoxMacros.Items.Clear();
             foreach (var item in Macros.EnumMainMacroEntry().OrderByDescending(c => c.LastUse))
             {
-                ComboBoxMacros.Items.Add(item);
+                ComboBoxMacros.Items.Add(new MacroItemForMain(item));
             }
             if (ComboBoxMacros.Items.Count > 0) ComboBoxMacros.SelectedIndex = 0;
         }
@@ -97,11 +97,11 @@ namespace InazumaWpf
 
         private void ComboBoxMacros_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = ComboBoxMacros.SelectedItem as MacroItem;
+            var item = ComboBoxMacros.SelectedItem as MacroItemForMain;
             if (item == null) return;
-            TextBoxCommandLine.Text = item.CommandLine;
+            TextBoxCommandLine.Text = item.ReferBody.CommandLine;
             TextBoxCommandLine.SelectAll();
-            CheckBoxDefaultEncoding.IsChecked = item.IsDefaultEncoding;
+            CheckBoxDefaultEncoding.IsChecked = item.ReferBody.IsDefaultEncoding;
         }
         [DllImport("kernel32.dll")]
         [ResourceExposure(ResourceScope.None)]
@@ -159,10 +159,10 @@ namespace InazumaWpf
             }
             this.Cursor = Cursors.Wait;
             await executeAsync(TextBoxCommandLine.Text, CheckBoxDefaultEncoding.IsChecked == true);
-            var item = ComboBoxMacros.SelectedItem as MacroItem;
+            var item = ComboBoxMacros.SelectedItem as MacroItemForMain;
             if (item != null)
             {
-                item.LastUse = DateTime.Now;
+                item.ReferBody.LastUse = DateTime.Now;
                 Macros.SetDirty();
                 Macros.CopyMainToTemp();
                 Macros.Save();
