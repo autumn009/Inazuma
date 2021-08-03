@@ -1,7 +1,7 @@
 Inazuma Procedural Text Editor
 ==============================
-Version 1.0.0.1
-2021年6月19日
+Version 1.0.0.2
+2021年8月3日
 川俣 晶 (autumn)
 
 　【これが超次元エディタだ!】
@@ -55,7 +55,7 @@ grep, grepを実行します。SEARCH TEXTまたはスクリプト全体を書き換えて使用します。
 sed, sedを実行します。SEARCH_FOR/REPlACE_WITHまたはスクリプト全体を書き換えて使用します。
 awk, awkを実行します。SEARCH_FORまたはスクリプト全体を書き換えて使用します。
 sort|uniq, sort|uniqを実行します。
-Current Directory, CDを実行します。
+Current Directory, CDを実行します。r
 File Association, ASSOCを実行します。
 Command Search Path, PATHを実行します。
 List Env Var, SETを実行します。
@@ -97,5 +97,6 @@ MIT License (Open Source)
 
 ● 改訂履歴
 1.0.0.1　2021年6月19日　最初のリリース
+1.0.0.2　2021年8月3日　intからlongへのキャストができない環境で走らないので修正
 
 以上

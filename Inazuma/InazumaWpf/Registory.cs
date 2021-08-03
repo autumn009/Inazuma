@@ -28,8 +28,7 @@ namespace InazumaWpf
                 var oldval = m.GetValue(key);
                 m.SetValue(key, newCodePage);
                 if (oldval == null) return 0;
-                var v = (long)oldval;
-                return (int)v;
+                return (int)oldval;
             }
         }
     }
