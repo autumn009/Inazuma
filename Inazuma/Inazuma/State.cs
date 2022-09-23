@@ -9,5 +9,8 @@ namespace Inazuma
     public static class State
     {
         public static string FileName { get; set; }
+        public static FileAbsotactionLayer FileAbsotactionLayer { get; set; }
+
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿//using Inazuma;
+using Inazuma;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -38,15 +39,8 @@ namespace InazumaWpf
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            //if (State.FileName != null) Open(State.FileName);
+            if (State.FileName != null) State.FileAbsotactionLayer = new FileAbsotactionLayer(State.FileName);
         }
-
-        //       internal Editor GetMyEditor() => myEditor;
-
-        //internal void Open(string fileName)
-        //{
-        //myEditor.Load(fileName);
-        //}
 
         private void ButtonEditMacros_Click(object sender, RoutedEventArgs e)
         {
