@@ -10,7 +10,7 @@
 　8/16進編集を持つ
 
 ● アーキテクチャ
-　FAL/fileAbsotactionLayer　バイナリーの管理。要求された場所から読み込む
+　FAL/FileAbsotactionLayer　バイナリーの管理。要求された場所から読み込む
 　VVRAM/VirtialVideoRamLayer　仮想VRAM　文字コードの2次元配列　全角文字の後半は無効値になる
 　LEL/LineEditorLayer　1行編集レイヤー
 　UIS/UISurfaceLayer　レンダリングと入力
