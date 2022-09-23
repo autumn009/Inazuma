@@ -42,6 +42,7 @@ namespace InazumaWpf
             if (State.FileName != null)
             {
                 State.FileAbsotactionLayer = new FileAbsotactionLayer(State.FileName);
+                // TBW dont use 32 and 16
                 State.VirtualVRam = new VirtualVRam(32, 16, State.FileAbsotactionLayer);
             }
         }

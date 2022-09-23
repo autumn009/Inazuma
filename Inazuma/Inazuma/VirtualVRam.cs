@@ -12,6 +12,8 @@ namespace Inazuma
         private long[,] vvram;
         private FileAbsotactionLayer fal;
 
+        public long[,] VVRam => vvram;
+
         public void FillVVRam(long masterPointer)
         {
             for (int x = 0; x < vvram.GetLength(0); x++)

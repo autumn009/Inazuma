@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inazuma;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace InazumaWpf
 {
@@ -22,9 +24,13 @@ namespace InazumaWpf
     /// </summary>
     public partial class MainEditControl : UserControl
     {
+        private int xCharSize;
+        private int yCharSize;
         public MainEditControl()
         {
             InitializeComponent();
+            xCharSize = 8;  // TBW
+            yCharSize = 16;  // TBW
         }
 
         public void SelectAll()
@@ -46,6 +52,32 @@ namespace InazumaWpf
             drawingContext.DrawRectangle(mySolidColorBrush, myPen, myRect);
 
             // drawing text
+            var vvram = State.VirtualVRam.VVRam;
+            for (int x = 0; x < vvram.GetLength(0); x++)
+            {
+                for (int y = 0; y < vvram.GetLength(1); y++)
+                {
+                    if (vvram[x, y] == -1) continue;
+                    string s = "";
+                    if(vvram[x, y] > 65535)
+                    {
+                        // TBW
+                    }
+                    else
+                    {
+                        s = ((char)vvram[x, y]).ToString();
+                    }
+                    FormattedText formattedText = new FormattedText(
+                        s,
+                        CultureInfo.CurrentCulture,
+                        FlowDirection.LeftToRight,
+                        new Typeface(this.FontFamily, this.FontStyle, this.FontWeight, this.FontStretch),   // TBW customize
+                        this.FontSize, // TBW customize
+                        Brushes.Black, // TBW customize
+                        1.0);
+                    drawingContext.DrawText(formattedText, new Point(x*xCharSize, y * yCharSize));
+                }
+            }
 #if false
             //var editor = WpfUtil.GetMyEditor(this);
             //var line = editor.GetCuurentLine();
