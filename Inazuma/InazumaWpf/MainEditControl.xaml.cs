@@ -27,7 +27,13 @@ namespace InazumaWpf
             InitializeComponent();
         }
 
-#if false
+        public void SelectAll()
+        { 
+            // TBW
+        }
+
+        public string Text { get; set; }    // TBW
+
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
@@ -40,8 +46,9 @@ namespace InazumaWpf
             drawingContext.DrawRectangle(mySolidColorBrush, myPen, myRect);
 
             // drawing text
-            var editor = WpfUtil.GetMyEditor(this);
-            var line = editor.GetCuurentLine();
+#if false
+            //var editor = WpfUtil.GetMyEditor(this);
+            //var line = editor.GetCuurentLine();
             double y = 0;
             for (; ; )
             {
@@ -58,7 +65,7 @@ namespace InazumaWpf
                 y += formattedText.Height;
                 line = line.Next;
             }
-        }
 #endif
+        }
     }
 }
