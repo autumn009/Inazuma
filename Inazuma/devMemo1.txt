@@ -2,6 +2,21 @@
 
 ●●● for blanch m02
 
+● m02の最終目標
+　最低限のエディタ機能を実現する
+　バイナリー形式のまま編集する　(Unicodeへ変換しない)
+　どんな巨大ファイルでも一瞬で編集開始状態になる。
+　任意のエンコーディングのテキストを編集できる
+　8/16進編集を持つ
+
+● アーキテクチャ
+　FAL/fileAbsotactionLayer　バイナリーの管理。要求された場所から読み込む
+　VVRAM/VirtialVideoRamLayer　仮想VRAM　文字コードの2次元配列　全角文字の後半は無効値になる
+　LEL/LineEditorLayer　1行編集レイヤー
+　UIS/UISurfaceLayer　レンダリングと入力
+　CharacterUnitDetector　文字範囲判定機　(サポートするエンコードの数だけ)
+　ZenHanDertector　全角半角判定機
+
 
 
 
