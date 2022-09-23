@@ -10,6 +10,7 @@ namespace Inazuma
     {
         public static string FileName { get; set; }
         public static FileAbsotactionLayer FileAbsotactionLayer { get; set; }
+        public static VirtualVRam VirtualVRam { get; set; }
 
 
     }

@@ -27,7 +27,7 @@ namespace Inazuma
         }
 
         // indexの位置を含むブロックを返す。未読み込みなら読み込む
-        public FileBlock GetBlock(int index)
+        public FileBlock GetBlock(long index)
         {
             // TBW
             return onlyBlock;
@@ -57,6 +57,7 @@ namespace Inazuma
         private byte[] image = new byte[0];
         private long from = 0;
         public byte[] Image { get { return image; } }
+        public long From { get { return from; } }
         public FileBlock(byte[] image, long from)
         {
             this.image = image;

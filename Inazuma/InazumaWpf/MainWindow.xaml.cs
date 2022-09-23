@@ -28,7 +28,7 @@ namespace InazumaWpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private Editor myEditor = new Editor();
+        private Editor myEditor = new Editor();
 
         public MainWindow()
         {
@@ -39,7 +39,11 @@ namespace InazumaWpf
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            if (State.FileName != null) State.FileAbsotactionLayer = new FileAbsotactionLayer(State.FileName);
+            if (State.FileName != null)
+            {
+                State.FileAbsotactionLayer = new FileAbsotactionLayer(State.FileName);
+                State.VirtualVRam = new VirtualVRam(32, 16, State.FileAbsotactionLayer);
+            }
         }
 
         private void ButtonEditMacros_Click(object sender, RoutedEventArgs e)
