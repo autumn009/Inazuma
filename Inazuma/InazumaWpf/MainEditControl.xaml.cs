@@ -47,6 +47,7 @@ namespace InazumaWpf
         {
             InitializeComponent();
             AddHandler(FrameworkElement.MouseDownEvent, new MouseButtonEventHandler(DrawArea_MouseDown), true);
+            AddHandler(Control.MouseDoubleClickEvent, new MouseButtonEventHandler(ContentControl_MouseDoubleClick), true);
         }
 
         public void SelectAll()

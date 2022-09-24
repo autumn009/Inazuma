@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:InazumaWpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ContentControl MouseDoubleClick="ContentControl_MouseDoubleClick">
+    <ContentControl x:Name="ContentCintrol"  MouseDoubleClick="ContentControl_MouseDoubleClick">
         <Grid x:Name="DrawArea" SizeChanged="DrawArea_SizeChanged" Loaded="DrawArea_Loaded" Unloaded="DrawArea_Unloaded"
               TextInput="DrawArea_TextInput" KeyDown="DrawArea_KeyDown" Focusable="True">
             <Rectangle x:Name="CursorRect" HorizontalAlignment="Left" VerticalAlignment="Top" Width="10" Height="10" Fill="Black" Opacity=".5" ></Rectangle>
