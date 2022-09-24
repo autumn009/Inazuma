@@ -196,15 +196,49 @@ namespace InazumaWpf
                     CursorDown();
                     break;
                 case Key.Up:
+                    CursorUp();
+                    break;
                 case Key.Left:
                 case Key.Right:
                 case Key.PageUp:
+                    CursorUp(State.VirtualVRam.VVRam.GetLength(1));
+                    break;
                 case Key.PageDown:
                     CursorDown(State.VirtualVRam.VVRam.GetLength(1));
                     break;
             }
             e.Handled = true;
             //System.Diagnostics.Debug.WriteLine("KD"+e.Key.ToString());
+        }
+
+        private void CursorUp(int count = 1)
+        {
+            var p = State.MasterPointer1;
+            if (p <= 0) return;
+
+            for (int i = 0; i < count; i++)
+            {
+                var block = State.FileAbsotactionLayer.GetBlock(p);
+                if (block == null) return;
+                p--;    // skip top of current line
+                p--;    // skip EOL in prev line
+                for (; ; )
+                {
+                    if (p <= 0) return;
+                    if (p < block.From)
+                    {
+                        block = State.FileAbsotactionLayer.GetBlock(p);
+                        if (block == null) return;
+                    }
+                    var ch = block.Image[p-- - block.From];
+                    if (p < 0 || General.IsEOLChar(ch)) break;
+                }
+                p++;    // skip last char of prev line
+                p++;    // go to top of next line
+            }
+            State.MasterPointer1 = p;
+            State.VirtualVRam.RecreateVRam(State.MasterPointer1);
+            InvalidateVisual();
         }
 
         private void CursorDown(int count=1)
