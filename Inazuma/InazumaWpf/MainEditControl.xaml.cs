@@ -1,6 +1,7 @@
 ﻿using Inazuma;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
+using Point = System.Windows.Point;
 
 namespace InazumaWpf
 {
@@ -29,6 +31,10 @@ namespace InazumaWpf
 
         private void resizeSub()
         {
+            if (xCharSize == 0 || yCharSize == 0) return;
+            // TBW dont use 32 and 16
+            State.VirtualVRam = new VirtualVRam(32, 16, State.FileAbsotactionLayer);
+
             InvalidateVisual();
         }
 
@@ -47,6 +53,7 @@ namespace InazumaWpf
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
+            if (State.VirtualVRam == null) return;
 
             // drawing background and border
             SolidColorBrush mySolidColorBrush = new SolidColorBrush();
