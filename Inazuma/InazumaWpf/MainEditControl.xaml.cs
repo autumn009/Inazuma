@@ -200,20 +200,25 @@ namespace InazumaWpf
                 case Key.Right:
                 case Key.PageUp:
                 case Key.PageDown:
+                    CursorDown(State.VirtualVRam.VVRam.GetLength(1));
                     break;
             }
+            e.Handled = true;
             //System.Diagnostics.Debug.WriteLine("KD"+e.Key.ToString());
         }
 
-        private void CursorDown()
+        private void CursorDown(int count=1)
         {
             var p = State.MasterPointer1;
-            var block = State.FileAbsotactionLayer.GetBlock(p);
-            for (; ; )
+            for (int i = 0; i < count; i++)
             {
-                if (p >= block.From + block.Image.LongLength) block = State.FileAbsotactionLayer.GetBlock(p);
-                var ch = block.Image[p++ - block.From];
-                if (General.IsEOLChar(ch)) break;
+                var block = State.FileAbsotactionLayer.GetBlock(p);
+                for (; ; )
+                {
+                    if (p >= block.From + block.Image.LongLength) block = State.FileAbsotactionLayer.GetBlock(p);
+                    var ch = block.Image[p++ - block.From];
+                    if (General.IsEOLChar(ch)) break;
+                }
             }
             State.MasterPointer1 = p;
             State.VirtualVRam.RecreateVRam(State.MasterPointer1);
