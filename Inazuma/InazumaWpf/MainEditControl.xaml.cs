@@ -169,6 +169,7 @@ namespace InazumaWpf
             CursorRect.Height = yCharSize;
 
             resizeSub();
+            DrawArea.Focus();
             startTimer();
         }
 
