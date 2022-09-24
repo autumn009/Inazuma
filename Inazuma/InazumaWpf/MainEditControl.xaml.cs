@@ -1,6 +1,7 @@
 ﻿using Inazuma;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -16,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 using Point = System.Windows.Point;
 
@@ -52,6 +54,27 @@ namespace InazumaWpf
         }
 
         public string Text { get; set; }    // TBW
+
+
+        void drawCursor()
+        {
+
+        }
+
+        private DispatcherTimer _timer;
+
+        private void MyTimerMethod(object sender, EventArgs e)
+        {
+            drawCursor();
+        }
+
+        private void SetupTimer()
+        {
+            _timer = new DispatcherTimer();
+            _timer.Interval = new TimeSpan(0, 0, 0, 30);
+            _timer.Tick += new EventHandler(MyTimerMethod);
+            _timer.Start();
+        }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
@@ -128,6 +151,12 @@ namespace InazumaWpf
             xCharSize = (int)formattedText.Width;
             yCharSize = (int)formattedText.Height;
             resizeSub();
+            SetupTimer();
+        }
+
+        private void DrawArea_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _timer.Stop();
         }
     }
 }
