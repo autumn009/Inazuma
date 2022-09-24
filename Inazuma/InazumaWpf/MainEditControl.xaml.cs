@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -224,18 +225,23 @@ namespace InazumaWpf
                 p--;    // skip EOL in prev line
                 for (; ; )
                 {
-                    if (p <= 0) return;
+                    if (p <= 0)
+                    {
+                        p = 0;
+                        goto direct;
+                    }
                     if (p < block.From)
                     {
                         block = State.FileAbsotactionLayer.GetBlock(p);
                         if (block == null) return;
                     }
                     var ch = block.Image[p-- - block.From];
-                    if (p < 0 || General.IsEOLChar(ch)) break;
+                    if (General.IsEOLChar(ch)) break;
                 }
                 p++;    // skip last char of prev line
                 p++;    // go to top of next line
             }
+            direct:
             State.MasterPointer1 = p;
             State.VirtualVRam.RecreateVRam(State.MasterPointer1);
             InvalidateVisual();

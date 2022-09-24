@@ -22,6 +22,7 @@ namespace Inazuma
 
             long p = masterPointer;
             var block = fal.GetBlock(p);
+            if (block == null) return;
 
             int xp = 0, yp = 0;
             for (; ; )
@@ -30,8 +31,8 @@ namespace Inazuma
                 if (offset >= block.Image.LongLength) break;
                 long ch = block.Image[offset];
                 bool newLine = false;
-                if (ch == 0x0a) newLine = true;
-                else if (ch == 0x0d) { /*ignore*/ }
+                if (General.IsEOLChar(ch)) newLine = true;
+                else if (General.IsIgnoreChar(ch)) { /*ignore*/ }
                 else vvram[xp, yp] = ch;
                 xp++;
                 if(newLine || xp >= vvram.GetLength(0) )
