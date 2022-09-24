@@ -46,10 +46,11 @@ namespace InazumaWpf
         public MainEditControl()
         {
             InitializeComponent();
+            AddHandler(FrameworkElement.MouseDownEvent, new MouseButtonEventHandler(DrawArea_MouseDown), true);
         }
 
         public void SelectAll()
-        { 
+        {
             // TBW
         }
 
@@ -60,7 +61,15 @@ namespace InazumaWpf
 
         private void MyTimerMethod(object sender, EventArgs e)
         {
-            CursorRect.Visibility = (CursorRect.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+            IInputElement focusedControl = Keyboard.FocusedElement;
+            if (DrawArea == focusedControl)
+            {
+                CursorRect.Visibility = (CursorRect.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+            }
+            else
+            {
+                CursorRect.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void startTimer()
@@ -91,7 +100,7 @@ namespace InazumaWpf
                 {
                     if (vvram[x, y] == -1) continue;
                     string s = "";
-                    if(vvram[x, y] > 65535)
+                    if (vvram[x, y] > 65535)
                     {
                         // TBW
                     }
@@ -107,7 +116,7 @@ namespace InazumaWpf
                         this.FontSize, // TBW customize
                         Brushes.Black, // TBW customize
                         1.0);
-                    drawingContext.DrawText(formattedText, new Point(x*xCharSize, y * yCharSize));
+                    drawingContext.DrawText(formattedText, new Point(x * xCharSize, y * yCharSize));
                 }
             }
 
@@ -165,6 +174,53 @@ namespace InazumaWpf
         private void DrawArea_Unloaded(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
+        }
+
+        private void DrawArea_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            //System.Diagnostics.Debug.WriteLine("TI:" + e.Text);
+        }
+
+        private void DrawArea_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Down:
+                    CursorDown();
+                    break;
+                case Key.Up:
+                case Key.Left:
+                case Key.Right:
+                case Key.PageUp:
+                case Key.PageDown:
+                    break;
+            }
+            //System.Diagnostics.Debug.WriteLine("KD"+e.Key.ToString());
+        }
+
+        private void CursorDown()
+        {
+            var p = State.MasterPointer1;
+            var block = State.FileAbsotactionLayer.GetBlock(p);
+            for (; ; )
+            {
+                if (p >= block.From + block.Image.LongLength) block = State.FileAbsotactionLayer.GetBlock(p);
+                var ch = block.Image[p++ - block.From];
+                if (General.IsEOLChar(ch)) break;
+            }
+            State.MasterPointer1 = p;
+            State.VirtualVRam.RecreateVRam(State.MasterPointer1);
+            InvalidateVisual();
+        }
+
+        private void DrawArea_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DrawArea.Focus();
+        }
+
+        private void ContentControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

@@ -49,6 +49,11 @@ namespace Inazuma
             FillVVRam(masterPointer);
         }
 
+        public void RecreateVRam(long masterPointer)
+        {
+            FillVVRam(masterPointer);
+        }
+
         public VirtualVRam(int xSize, int ySize, FileAbsotactionLayer fal)
         {
             this.fal = fal;
