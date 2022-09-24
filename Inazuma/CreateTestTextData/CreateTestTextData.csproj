@@ -8,10 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="lines.txt" />
     <None Remove="words.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="lines.txt" />
     <EmbeddedResource Include="words.txt" />
   </ItemGroup>
 
