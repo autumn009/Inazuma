@@ -32,8 +32,11 @@ namespace InazumaWpf
         private void resizeSub()
         {
             if (xCharSize == 0 || yCharSize == 0) return;
-            // TBW dont use 32 and 16
-            State.VirtualVRam = new VirtualVRam(32, 16, State.FileAbsotactionLayer);
+            var size = this.RenderSize;
+            if (size.Width == 0 || size.Height == 0) return;
+            var x = (int)(size.Width / xCharSize);
+            var y = (int)(size.Height / yCharSize);
+            State.VirtualVRam = new VirtualVRam(x, y, State.FileAbsotactionLayer);
 
             InvalidateVisual();
         }
@@ -115,8 +118,6 @@ namespace InazumaWpf
 
         private void DrawArea_Loaded(object sender, RoutedEventArgs e)
         {
-            var size = this.RenderSize;
-            if (size.Width == 0 || size.Height == 0) return;
             FormattedText formattedText = new FormattedText("A",
                         CultureInfo.CurrentCulture,
                         FlowDirection.LeftToRight,
