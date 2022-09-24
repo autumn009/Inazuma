@@ -56,22 +56,17 @@ namespace InazumaWpf
         public string Text { get; set; }    // TBW
 
 
-        void drawCursor()
-        {
-
-        }
-
         private DispatcherTimer _timer;
 
         private void MyTimerMethod(object sender, EventArgs e)
         {
-            drawCursor();
+            CursorRect.Visibility = (CursorRect.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
         }
 
-        private void SetupTimer()
+        private void startTimer()
         {
             _timer = new DispatcherTimer();
-            _timer.Interval = new TimeSpan(0, 0, 0, 30);
+            _timer.Interval = new TimeSpan(0, 0, 0, 0, 500, 0);
             _timer.Tick += new EventHandler(MyTimerMethod);
             _timer.Start();
         }
@@ -115,6 +110,16 @@ namespace InazumaWpf
                     drawingContext.DrawText(formattedText, new Point(x*xCharSize, y * yCharSize));
                 }
             }
+
+            // drawing cursor
+            //SolidColorBrush myCursorSolidColorBrush = new SolidColorBrush();
+            //myCursorSolidColorBrush.Color = Colors.Black;
+            //Rect myCursorRect = new Rect(0, 0, Math.Max(2,xCharSize/8), yCharSize);
+            //drawingContext.DrawRectangle(myCursorSolidColorBrush, null, myCursorRect);
+
+
+
+
 #if false
             //var editor = WpfUtil.GetMyEditor(this);
             //var line = editor.GetCuurentLine();
@@ -150,8 +155,11 @@ namespace InazumaWpf
                         1.0);
             xCharSize = (int)formattedText.Width;
             yCharSize = (int)formattedText.Height;
+            CursorRect.Width = Math.Max(2, xCharSize / 8);
+            CursorRect.Height = yCharSize;
+
             resizeSub();
-            SetupTimer();
+            startTimer();
         }
 
         private void DrawArea_Unloaded(object sender, RoutedEventArgs e)
