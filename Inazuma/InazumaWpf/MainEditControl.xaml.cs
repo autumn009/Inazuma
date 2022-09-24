@@ -213,9 +213,14 @@ namespace InazumaWpf
             for (int i = 0; i < count; i++)
             {
                 var block = State.FileAbsotactionLayer.GetBlock(p);
+                if (block == null) return;
                 for (; ; )
                 {
-                    if (p >= block.From + block.Image.LongLength) block = State.FileAbsotactionLayer.GetBlock(p);
+                    if (p >= block.From + block.Image.LongLength)
+                    {
+                        block = State.FileAbsotactionLayer.GetBlock(p);
+                        if (block == null) return;
+                    }
                     var ch = block.Image[p++ - block.From];
                     if (General.IsEOLChar(ch)) break;
                 }

@@ -30,6 +30,11 @@ namespace Inazuma
         public FileBlock GetBlock(long index)
         {
             // TBW
+            if( index >= image.LongLength)
+            {
+                return null;
+            }
+
             return onlyBlock;
         }
 
