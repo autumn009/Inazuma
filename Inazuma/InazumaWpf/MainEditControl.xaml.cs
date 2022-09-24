@@ -207,6 +207,8 @@ namespace InazumaWpf
                 case Key.PageDown:
                     CursorDown(State.VirtualVRam.VVRam.GetLength(1));
                     break;
+                default:
+                    return; // 後処理をすっ飛ばす
             }
             e.Handled = true;
             //System.Diagnostics.Debug.WriteLine("KD"+e.Key.ToString());
