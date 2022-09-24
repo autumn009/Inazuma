@@ -248,6 +248,7 @@ namespace InazumaWpf
         private void ModeNormal_Click(object sender, RoutedEventArgs e)
         {
             setActivePane(NormalPane);
+            NormalTextBoxSrc.ResizeSub();
             NormalTextBoxSrc.Focus();
         }
 
@@ -259,6 +260,7 @@ namespace InazumaWpf
         private void ModeProc_Click(object sender, RoutedEventArgs e)
         {
             setActivePane(ProcPane);
+            TextBoxSrc.ResizeSub();
             TextBoxSrc.Focus();
         }
     }

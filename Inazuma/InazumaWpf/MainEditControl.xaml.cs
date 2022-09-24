@@ -32,7 +32,7 @@ namespace InazumaWpf
         private int xCharSize;
         private int yCharSize;
 
-        private void resizeSub()
+        public void ResizeSub()
         {
             if (xCharSize == 0 || yCharSize == 0) return;
             var size = this.RenderSize;
@@ -159,7 +159,7 @@ namespace InazumaWpf
             DrawArea.Focus();
         }
 
-        private void DrawArea_SizeChanged(object sender, SizeChangedEventArgs e) => resizeSub();
+        private void DrawArea_SizeChanged(object sender, SizeChangedEventArgs e) => ResizeSub();
 
         private void DrawArea_Loaded(object sender, RoutedEventArgs e)
         {
@@ -175,7 +175,7 @@ namespace InazumaWpf
             CursorRect.Width = Math.Max(2, xCharSize / 8);
             CursorRect.Height = yCharSize;
 
-            resizeSub();
+            ResizeSub();
             startTimer();
         }
 
