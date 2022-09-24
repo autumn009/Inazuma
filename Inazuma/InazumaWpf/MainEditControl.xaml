@@ -6,10 +6,6 @@
              xmlns:local="clr-namespace:InazumaWpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid x:Name="DrawArea" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Canvas />
-
-        </Grid>
+    <Grid x:Name="DrawArea" SizeChanged="DrawArea_SizeChanged" Loaded="DrawArea_Loaded">
     </Grid>
 </UserControl>

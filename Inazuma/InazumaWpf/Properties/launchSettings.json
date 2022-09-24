@@ -2,7 +2,7 @@
   "profiles": {
     "InazumaWpf": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\delme\\inatest1.txt\""
+      "commandLineArgs": "\"C:\\delme\\testdata\\Test 100 lines by US-ASCII.txt\""
     }
   }
 }

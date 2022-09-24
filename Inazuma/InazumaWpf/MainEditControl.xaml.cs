@@ -26,11 +26,15 @@ namespace InazumaWpf
     {
         private int xCharSize;
         private int yCharSize;
+
+        private void resizeSub()
+        {
+            InvalidateVisual();
+        }
+
         public MainEditControl()
         {
             InitializeComponent();
-            xCharSize = 8;  // TBW
-            yCharSize = 16;  // TBW
         }
 
         public void SelectAll()
@@ -98,6 +102,24 @@ namespace InazumaWpf
                 line = line.Next;
             }
 #endif
+        }
+
+        private void DrawArea_SizeChanged(object sender, SizeChangedEventArgs e) => resizeSub();
+
+        private void DrawArea_Loaded(object sender, RoutedEventArgs e)
+        {
+            var size = this.RenderSize;
+            if (size.Width == 0 || size.Height == 0) return;
+            FormattedText formattedText = new FormattedText("A",
+                        CultureInfo.CurrentCulture,
+                        FlowDirection.LeftToRight,
+                        new Typeface(this.FontFamily, this.FontStyle, this.FontWeight, this.FontStretch),   // TBW customize
+                        this.FontSize, // TBW customize
+                        Brushes.Black, // TBW customize
+                        1.0);
+            xCharSize = (int)formattedText.Width;
+            yCharSize = (int)formattedText.Height;
+            resizeSub();
         }
     }
 }
