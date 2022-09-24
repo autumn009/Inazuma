@@ -42,8 +42,6 @@ namespace InazumaWpf
             if (State.FileName != null)
             {
                 State.FileAbsotactionLayer = new FileAbsotactionLayer(State.FileName);
-                // TBW dont use 32 and 16
-                //State.VirtualVRam = new VirtualVRam(32, 16, State.FileAbsotactionLayer);
             }
         }
 
@@ -95,6 +93,7 @@ namespace InazumaWpf
             }
             else
                 MessageBox.Show(this, r);
+            TextBoxSrc.Focus();
         }
 
         private void ComboBoxMacros_SelectionChanged(object sender, SelectionChangedEventArgs e)

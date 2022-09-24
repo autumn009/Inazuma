@@ -152,6 +152,12 @@ namespace InazumaWpf
 #endif
         }
 
+        protected override void OnGotFocus(System.Windows.RoutedEventArgs e)
+        {
+            base.OnGotFocus(e);
+            DrawArea.Focus();
+        }
+
         private void DrawArea_SizeChanged(object sender, SizeChangedEventArgs e) => resizeSub();
 
         private void DrawArea_Loaded(object sender, RoutedEventArgs e)
@@ -169,7 +175,6 @@ namespace InazumaWpf
             CursorRect.Height = yCharSize;
 
             resizeSub();
-            DrawArea.Focus();
             startTimer();
         }
 
