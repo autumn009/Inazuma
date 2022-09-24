@@ -93,7 +93,7 @@ namespace InazumaWpf
             }
             else
                 MessageBox.Show(this, r);
-            TextBoxSrc.Focus();
+            NormalTextBoxSrc.Focus();
         }
 
         private void ComboBoxMacros_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -227,6 +227,11 @@ namespace InazumaWpf
             }
             Clipboard.Clear();
             Clipboard.SetText(text);
+        }
+
+        private void MenuFileExit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

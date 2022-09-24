@@ -8,44 +8,66 @@
         Loaded="Window_Loaded"
         Title="Inazuma" Height="450" Width="800" Background="Transparent" Icon="/Icon.jpg">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Azure">
-        <Grid Name="Grid1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="Grid1" Grid.Row="0">
             <Menu VerticalAlignment="Top">
-                <MenuItem Header="ファイル">
-                    <MenuItem Header="終了" />
-                    <MenuItem Header="保存" />
-                    <MenuItem Header="終了" />
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New" />
+                    <MenuItem Header="_Open" />
+                    <MenuItem Header="_Save" />
+                    <MenuItem Header="Save _As" />
+                    <MenuItem Header="E_xit" Name="MenuFileExit" Click="MenuFileExit_Click" />
                 </MenuItem>
-                <MenuItem Header="編集">
-                    <MenuItem Header="コピー" />
-                    <MenuItem Header="切り取り" />
-                    <MenuItem Header="貼り付け" />
+                <MenuItem Header="_Edit">
+                    <MenuItem Header="_Copy" />
+                    <MenuItem Header="_Cut" />
+                    <MenuItem Header="_Paste" />
+                    <MenuItem Header="_Undo" />
+                    <MenuItem Header="_Options" />
+                </MenuItem>
+                <MenuItem Header="_Mode">
+                    <MenuItem Header="_Normal" />
+                    <MenuItem Header="_Shell Mode" />
+                    <MenuItem Header="_Horizontal Divide" />
+                    <MenuItem Header="_Vertical Dvide" />
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_About..." />
                 </MenuItem>
             </Menu>
         </Grid>
+        <Grid Name="Grid2" Grid.Row="1">
+            <Grid Name="NormalPane" Visibility="visible">
+                <local:MainEditControl x:Name="NormalTextBoxSrc" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="MS Gothic" ToolTip="Text Standard Input"/>
+            </Grid>
+            <Grid Name="ShellPane" Visibility="Collapsed">
+                <Label Content="_Macro:" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+                <ComboBox Name="ComboBoxMacros" Width="120" Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="ComboBoxMacros_SelectionChanged"/>
+                <Label Content="_Command:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,0,0,0"></Label>
+                <TextBox Name="TextBoxCommandLine" Margin="250,0,170,0" Height="28" VerticalAlignment="Top" ToolTip="Command to Execute"/>
+                <Button Name="ButtonEditMacros" Click="ButtonEditMacros_Click"  Width="100" Content="_Edit Macros" HorizontalAlignment="Right" VerticalAlignment="Top" Height="22"/>
+                <CheckBox Name="CheckBoxDefaultEncoding" HorizontalAlignment="Right" Margin="0,0,100,0">_DEF ENC</CheckBox>
+                <!-- <TextBox Name="TextBoxSrc" Text="" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0" FontFamily="MS Gothic" ToolTip="Text Standard Input"/> -->
+                <local:MainEditControl x:Name="TextBoxSrc" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0" FontFamily="MS Gothic" ToolTip="Text Standard Input"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,175,0,0">
+                    <Button Name="ButtonSetDir" Click="ButtonSetDir_Click" Content="_Working Dir" Margin="5,0,0,0"/>
+                    <Button Name="ButtonPasteSrc" Click="ButtonPasteSrc_Click" Content="_Paste Source" Margin="5,0,0,0"/>
+                    <Button Name="ButtonRun" Click="ButtonRun_Click" Content="_Run↓" Margin="5,0,0,0" IsDefault="True" FontSize="20" Width="80"/>
+                    <Button Name="ButtonCopyDst" Click="ButtonCopyDst_Click" Content="Cop_y Result" Margin="5,0,0,0"/>
+                    <TextBlock Text="Inazuma Procedural Text Editor by autumn" FontStyle="Italic" FontWeight="Black" Margin="18,6,0,0"></TextBlock>
+                    <TextBlock x:Name="LabelVersion" Text="Version X.X" FontStyle="Italic" FontWeight="Black" Margin="6,6,0,0"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,205,0,0">
+                    <Label Content="Working Dir:" Margin="5,-4,0,-4" FontWeight="Bold"/>
+                    <TextBlock Name="LabelWorkingDir" Text="FULLPATH HERE" Margin="0,1,0,0"/>
 
-        <Label Content="_Macro:" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
-        <ComboBox Name="ComboBoxMacros" Width="120" Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="ComboBoxMacros_SelectionChanged"/>
-        <Label Content="_Command:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,0,0,0"></Label>
-        <TextBox Name="TextBoxCommandLine" Margin="250,0,170,0" Height="28" VerticalAlignment="Top" ToolTip="Command to Execute"/>
-        <Button Name="ButtonEditMacros" Click="ButtonEditMacros_Click"  Width="100" Content="_Edit Macros" HorizontalAlignment="Right" VerticalAlignment="Top" Height="22"/>
-        <CheckBox Name="CheckBoxDefaultEncoding" HorizontalAlignment="Right" Margin="0,0,100,0">_DEF ENC</CheckBox>
-        <!-- <TextBox Name="TextBoxSrc" Text="" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0" FontFamily="MS Gothic" ToolTip="Text Standard Input"/> -->
-        <local:MainEditControl x:Name="TextBoxSrc" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="140" Margin="0,30,0,0" FontFamily="MS Gothic" ToolTip="Text Standard Input"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,175,0,0">
-            <Button Name="ButtonSetDir" Click="ButtonSetDir_Click" Content="_Working Dir" Margin="5,0,0,0"/>
-            <Button Name="ButtonPasteSrc" Click="ButtonPasteSrc_Click" Content="_Paste Source" Margin="5,0,0,0"/>
-            <Button Name="ButtonRun" Click="ButtonRun_Click" Content="_Run↓" Margin="5,0,0,0" IsDefault="True" FontSize="20" Width="80"/>
-            <Button Name="ButtonCopyDst" Click="ButtonCopyDst_Click" Content="Cop_y Result" Margin="5,0,0,0"/>
-            <TextBlock Text="Inazuma Procedural Text Editor by autumn" FontStyle="Italic" FontWeight="Black" Margin="18,6,0,0"></TextBlock>
-            <TextBlock x:Name="LabelVersion" Text="Version X.X" FontStyle="Italic" FontWeight="Black" Margin="6,6,0,0"></TextBlock>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,205,0,0">
-            <Label Content="Working Dir:" Margin="5,-4,0,-4" FontWeight="Bold"/>
-            <TextBlock Name="LabelWorkingDir" Text="FULLPATH HERE" Margin="0,1,0,0"/>
-
-        </StackPanel>
-        <TextBox Name="TextBoxDst" Text="" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,225,0,0" FontFamily="MS Gothic" ToolTip="Text Standard/Error Output"/>
-
+                </StackPanel>
+                <TextBox Name="TextBoxDst" Text="" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,225,0,0" FontFamily="MS Gothic" ToolTip="Text Standard/Error Output"/>
+            </Grid>
+        </Grid>
 
 
 
