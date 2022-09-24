@@ -29,10 +29,11 @@
                     <MenuItem Header="_Options" />
                 </MenuItem>
                 <MenuItem Header="_Mode">
-                    <MenuItem Header="_Normal" />
-                    <MenuItem Header="_Shell Mode" />
-                    <MenuItem Header="_Horizontal Divide" />
-                    <MenuItem Header="_Vertical Dvide" />
+                    <MenuItem Header="_Normal" Name="ModeNormal" Click="ModeNormal_Click"/>
+                    <MenuItem Header="_Procedual"  Name="ModeProc" Click="ModeProc_Click"/>
+                    <MenuItem Header="_Shell"  Name="ModeShell" Click="ModeShell_Click"/>
+                    <MenuItem Header="_Horizontal Divide"  Name="ModeHorizonal"/>
+                    <MenuItem Header="_Vertical Divide"  Name="ModeVertical"/>
                 </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem Header="_About..." />
@@ -44,6 +45,9 @@
                 <local:MainEditControl x:Name="NormalTextBoxSrc" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="MS Gothic" ToolTip="Text Standard Input"/>
             </Grid>
             <Grid Name="ShellPane" Visibility="Collapsed">
+                <!-- TBW -->                
+            </Grid>
+            <Grid Name="ProcPane" Visibility="Collapsed">
                 <Label Content="_Macro:" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
                 <ComboBox Name="ComboBoxMacros" Width="120" Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="ComboBoxMacros_SelectionChanged"/>
                 <Label Content="_Command:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,0,0,0"></Label>

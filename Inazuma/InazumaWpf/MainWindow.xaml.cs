@@ -233,5 +233,33 @@ namespace InazumaWpf
         {
             Close();
         }
+
+        private void setActivePaneSub(Grid target, Grid pane)
+        {
+            target.Visibility = (pane == target)? Visibility.Visible: Visibility.Collapsed;
+        }
+
+        private void setActivePane(Grid pane)
+        {
+            setActivePaneSub(NormalPane, pane);
+            setActivePaneSub(ProcPane, pane);
+        }
+
+        private void ModeNormal_Click(object sender, RoutedEventArgs e)
+        {
+            setActivePane(NormalPane);
+            NormalTextBoxSrc.Focus();
+        }
+
+        private void ModeShell_Click(object sender, RoutedEventArgs e)
+        {
+            setActivePane(ShellPane);
+        }
+
+        private void ModeProc_Click(object sender, RoutedEventArgs e)
+        {
+            setActivePane(ProcPane);
+            TextBoxSrc.Focus();
+        }
     }
 }
