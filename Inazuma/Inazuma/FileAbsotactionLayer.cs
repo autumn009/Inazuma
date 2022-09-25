@@ -44,6 +44,13 @@ namespace Inazuma
             return image.LongLength;
         }
 
+        public long GetByte(long totalOffset)
+        {
+            var block = State.FileAbsotactionLayer.GetBlock(totalOffset);
+            if (block == null) return -1;
+            return block.Image[totalOffset - block.From];
+        }
+
         public FileAbsotactionLayer(string filename)
         {
             fullPath = Path.GetFullPath(filename);

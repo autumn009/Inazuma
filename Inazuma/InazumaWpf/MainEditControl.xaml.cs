@@ -6,6 +6,7 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -215,6 +216,82 @@ namespace InazumaWpf
             //System.Diagnostics.Debug.WriteLine("KD"+e.Key.ToString());
         }
 
+        private long seekLineTop(long p)
+        {
+            var block = State.FileAbsotactionLayer.GetBlock(p);
+            if (block == null) return -1;
+            p--;    // skip top of current line
+            p--;    // skip EOL in prev line
+            for (; ; )
+            {
+                if (p <= 0)
+                {
+                    return 0;   // line top is text top
+                }
+                if (p < block.From)
+                {
+                    block = State.FileAbsotactionLayer.GetBlock(p);
+                    if (block == null) return -1;
+                }
+                var ch = block.Image[p-- - block.From];
+                if (General.IsEOLChar(ch)) break;
+            }
+            p++;    // skip last char of prev line
+            p++;    // go to top of next line
+            return p;
+        }
+
+        private long[,] analizeLineToVVRamFormat(int xSize, long p)
+        {
+            p = seekLineTop(p);
+            List<long[]> list = new List<long[]>();
+            bool exit = false;
+            for(; ; )
+            {
+                var line = Enumerable.Repeat(-1, xSize).Cast<long>().ToArray();
+                for (int i = 0; i < line.Length; i++)
+                {
+                    // TBW マルチバイト対応
+                    var ch = State.FileAbsotactionLayer.GetByte(p++);
+                    if (General.IsEOLChar(ch))
+                    {
+                        exit = true;
+                        break;
+                    }
+                    line[i] = ch;
+                }
+                list.Add(line);
+                if (exit) break;
+            }
+            var vvram = new long[xSize, list.Count];
+            for (int y = 0; y < vvram.GetLength(0); y++)
+            {
+                for (int x = 0; x < vvram.GetLength(1); x++)
+                {
+                    vvram[x, y] = list[y][x];
+                }
+            }
+            return vvram;
+        }
+
+        private int getCurrentCursorX(int xSize, long pTarget)
+        {
+            var p = seekLineTop(pTarget);
+            for (; ; )
+            {
+                for (int i = 0; i < xSize; i++)
+                {
+                    if (p == pTarget) return i;
+                    // TBW マルチバイト対応
+                    var ch = State.FileAbsotactionLayer.GetByte(p++);
+                    if (General.IsEOLChar(ch))
+                    {
+                        return i;
+                    }
+                }
+            }
+        }
+
         private void CursorUp(int count = 1)
         {
             var p = State.MasterPointer1;
@@ -250,14 +327,16 @@ namespace InazumaWpf
             InvalidateVisual();
         }
 
-        private void CursorDown(int count=1)
+        private void CursorDown(int count = 1)
         {
             var p = State.MasterPointer1;
             for (int i = 0; i < count; i++)
             {
                 var block = State.FileAbsotactionLayer.GetBlock(p);
                 if (block == null) return;
-                for (; ; )
+                int xCursor = getCurrentCursorX(State.VirtualVRam.VVRam.GetLength(0), State.MasterPointer1);
+                bool exceedLine = false;
+                for (int x = 0; x < State.VirtualVRam.VVRam.GetLength(0); x++)
                 {
                     if (p >= block.From + block.Image.LongLength)
                     {
@@ -265,7 +344,20 @@ namespace InazumaWpf
                         if (block == null) return;
                     }
                     var ch = block.Image[p++ - block.From];
-                    if (General.IsEOLChar(ch)) break;
+                    if (General.IsEOLChar(ch))
+                    {
+                        exceedLine = true;
+                        break;
+                    }
+                }
+                if (exceedLine)
+                {
+                    for (int j = 0; j < State.VirtualVRam.VVRam.GetLength(0); j++)
+                    {
+                        if (j == xCursor) break;
+                        long ch = State.FileAbsotactionLayer.GetByte(p++);
+                        if (General.IsEOLChar(ch)) break;
+                    }
                 }
             }
             State.MasterPointer1 = p;
