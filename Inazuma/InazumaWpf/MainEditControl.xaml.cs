@@ -294,6 +294,12 @@ namespace InazumaWpf
             {
                 for (int i = 0; i < xSize; i++)
                 {
+                    for(; ;)
+                    {
+                        long ch2 = State.FileAbsotactionLayer.GetByte(p);
+                        if (!General.IsIgnoreChar(ch2)) break;
+                        p++;
+                    }
                     if (p == pTarget) return i;
                     // TBW マルチバイト対応
                     var ch = State.FileAbsotactionLayer.GetByte(p++);
