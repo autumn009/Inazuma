@@ -31,9 +31,9 @@ namespace Inazuma
                 if (offset >= block.Image.LongLength) break;
                 long ch = block.Image[offset];
                 bool newLine = false;
-                if (General.IsEOLChar(ch)) newLine = true;
-                else if (General.IsIgnoreChar(ch)) { /*ignore*/ }
+                if (General.IsIgnoreChar(ch)) { /*ignore*/ }
                 else vvram[xp, yp] = ch;
+                if (General.IsEOLChar(ch)) newLine = true;
                 xp++;
                 if(newLine || xp >= vvram.GetLength(0) )
                 {

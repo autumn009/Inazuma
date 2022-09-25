@@ -112,13 +112,20 @@ namespace InazumaWpf
                     {
                         s = ((char)vvram[x, y]).ToString();
                     }
+                    var brush = Brushes.Black;
+                    if (General.IsEOLChar(vvram[x,y]))
+                    {
+                        brush = Brushes.DarkRed;
+                        s = "↓";
+                    }
+
                     FormattedText formattedText = new FormattedText(
                         s,
                         CultureInfo.CurrentCulture,
                         FlowDirection.LeftToRight,
                         new Typeface(this.FontFamily, this.FontStyle, this.FontWeight, this.FontStretch),   // TBW customize
                         this.FontSize, // TBW customize
-                        Brushes.Black, // TBW customize
+                        brush, // TBW customize
                         1.0);
                     drawingContext.DrawText(formattedText, new Point(x * xCharSize, y * yCharSize));
                 }
