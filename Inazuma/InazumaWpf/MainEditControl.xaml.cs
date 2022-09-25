@@ -247,8 +247,9 @@ namespace InazumaWpf
                     block = State.FileAbsotactionLayer.GetBlock(p);
                     if (block == null) return -1;
                 }
-                var ch = block.Image[p-- - block.From];
+                var ch = block.Image[p - block.From];
                 if (General.IsEOLChar(ch)) break;
+                p--;
             }
             p++;    // skip current char
             return p;
