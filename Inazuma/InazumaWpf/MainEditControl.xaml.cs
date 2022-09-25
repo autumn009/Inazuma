@@ -357,11 +357,15 @@ namespace InazumaWpf
                 ch = State.FileAbsotactionLayer.GetByte(State.MasterPointer1);
                 if (!General.IsIgnoreChar(ch)) break;
             }
-            if (General.IsEOLChar(currentChar))
+            //if (General.IsEOLChar(currentChar))
+            //{
+            //yCursor += 1;
+            //}
+            int xCursor = getCurrentCursorX(State.VirtualVRam.VVRam.GetLength(0), State.MasterPointer1);
+            if( xCursor == 0)
             {
                 yCursor += 1;
             }
-            int xCursor = getCurrentCursorX(State.VirtualVRam.VVRam.GetLength(0), State.MasterPointer1);
             setCursorPos(xCursor, yCursor);
         }
 
