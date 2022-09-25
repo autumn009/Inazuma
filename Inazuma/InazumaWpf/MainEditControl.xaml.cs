@@ -227,8 +227,7 @@ namespace InazumaWpf
         {
             var block = State.FileAbsotactionLayer.GetBlock(p);
             if (block == null) return -1;
-            p--;    // skip top of current line
-            p--;    // skip EOL in prev line
+            p--;    // skip current char
             for (; ; )
             {
                 if (p <= 0)
@@ -243,8 +242,7 @@ namespace InazumaWpf
                 var ch = block.Image[p-- - block.From];
                 if (General.IsEOLChar(ch)) break;
             }
-            p++;    // skip last char of prev line
-            p++;    // go to top of next line
+            p++;    // skip current char
             return p;
         }
 
@@ -341,7 +339,7 @@ namespace InazumaWpf
             {
                 var block = State.FileAbsotactionLayer.GetBlock(p);
                 if (block == null) return;
-                int xCursor = 0;    // TBW getCurrentCursorX(State.VirtualVRam.VVRam.GetLength(0), State.MasterPointer1);
+                int xCursor = getCurrentCursorX(State.VirtualVRam.VVRam.GetLength(0), State.MasterPointer1);
                 bool exceedLine = false;
                 for (int x = 0; x < State.VirtualVRam.VVRam.GetLength(0); x++)
                 {
