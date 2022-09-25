@@ -46,6 +46,11 @@ namespace InazumaWpf
             InvalidateVisual();
         }
 
+        private void setCursorPos(int xCursor, int yCursor)
+        {
+            CursorRect.Margin = new Thickness(xCursor * xCharSize, yCursor * yCharSize, 0, 0);
+        }
+
         public MainEditControl()
         {
             InitializeComponent();
@@ -209,7 +214,10 @@ namespace InazumaWpf
                     CursorUp();
                     break;
                 case Key.Left:
+                    break;
                 case Key.Right:
+                    CursorRight();
+                    break;
                 case Key.PageUp:
                     CursorUp(State.VirtualVRam.VVRam.GetLength(1));
                     break;
@@ -330,6 +338,18 @@ namespace InazumaWpf
             State.MasterPointer1 = p;
             State.VirtualVRam.RecreateVRam(State.MasterPointer1);
             InvalidateVisual();
+        }
+
+        private void CursorRight()
+        {
+            for (; ; )
+            {
+                State.MasterPointer1++;
+                long ch = State.FileAbsotactionLayer.GetByte(State.MasterPointer1);
+                if (!General.IsSkipChar(ch)) break;
+            }
+            int xCursor = getCurrentCursorX(State.VirtualVRam.VVRam.GetLength(0), State.MasterPointer1);
+            setCursorPos(xCursor, yCursor);
         }
 
         private void CursorDown(int count = 1)
