@@ -341,7 +341,7 @@ namespace InazumaWpf
             {
                 var block = State.FileAbsotactionLayer.GetBlock(p);
                 if (block == null) return;
-                int xCursor = getCurrentCursorX(State.VirtualVRam.VVRam.GetLength(0), State.MasterPointer1);
+                int xCursor = 0;    // TBW getCurrentCursorX(State.VirtualVRam.VVRam.GetLength(0), State.MasterPointer1);
                 bool exceedLine = false;
                 for (int x = 0; x < State.VirtualVRam.VVRam.GetLength(0); x++)
                 {
