@@ -10,7 +10,7 @@ Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 string[] words = getWords("CreateTestTextData.words.txt");
 Console.WriteLine($"Detect {words.Length} words in resource");
 string[] lineData = getWords("CreateTestTextData.lines.txt");
-Console.WriteLine($"Detect {words.Length} lines in resource");
+Console.WriteLine($"Detect {lineData.Length} lines in resource");
 
 Encoding[] encodings = { Encoding.ASCII, Encoding.UTF8, Encoding.Unicode, Encoding.GetEncoding("Shift_JIS"), Encoding.GetEncoding("ISO-2022-JP"), Encoding.GetEncoding("EUC-JP") };
 int[] lines = { 10, 100, 1000, 10000, 100000, 1000000 };
