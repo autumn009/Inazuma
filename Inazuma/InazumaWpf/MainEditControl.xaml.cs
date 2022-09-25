@@ -116,7 +116,7 @@ namespace InazumaWpf
                     if (General.IsEOLChar(vvram[x,y]))
                     {
                         brush = Brushes.DarkRed;
-                        s = "↓";
+                        s = "⊢";
                     }
 
                     FormattedText formattedText = new FormattedText(
