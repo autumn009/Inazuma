@@ -31,6 +31,7 @@ void CreateOneData(int lines, Encoding encoding, bool forceLineDataOnly = false)
     Console.WriteLine($"Writing: {fullpath}");
     using TextWriter writer = new StreamWriter(fullpath, false, encoding);
 
+    writer.Write($"{0}: ");
     for (int i = 0; i < 10; i++)
     {
         writer.Write("The quick brown fox jumps over the lazy dog. ");
@@ -38,6 +39,7 @@ void CreateOneData(int lines, Encoding encoding, bool forceLineDataOnly = false)
     writer.WriteLine();
     for (int i = 1; i < lines; i++)
     {
+        writer.Write($"{i}: ");
         if (forceLineDataOnly || Random.Shared.Next(10) < 1)
         {
             for (int j = 0; j < Random.Shared.Next(5); j++)
