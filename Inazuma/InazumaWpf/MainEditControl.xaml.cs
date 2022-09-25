@@ -31,6 +31,7 @@ namespace InazumaWpf
     {
         private int xCharSize;
         private int yCharSize;
+        private int yCursor;
 
         public void ResizeSub()
         {

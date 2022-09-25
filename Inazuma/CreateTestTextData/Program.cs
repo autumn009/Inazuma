@@ -31,12 +31,20 @@ void CreateOneData(int lines, Encoding encoding, bool forceLineDataOnly = false)
     Console.WriteLine($"Writing: {fullpath}");
     using TextWriter writer = new StreamWriter(fullpath, false, encoding);
 
-    writer.WriteLine("The quick brown fox jumps over the lazy dog");
+    for (int i = 0; i < 10; i++)
+    {
+        writer.Write("The quick brown fox jumps over the lazy dog. ");
+    }
+    writer.WriteLine();
     for (int i = 1; i < lines; i++)
     {
         if (forceLineDataOnly || Random.Shared.Next(10) < 1)
         {
-            writer.WriteLine(lineData[Random.Shared.Next(lineData.Length)]);
+            for (int j = 0; j < Random.Shared.Next(5); j++)
+            {
+                writer.Write(lineData[Random.Shared.Next(lineData.Length)]);
+            }
+            writer.WriteLine();
         }
         else
         {
